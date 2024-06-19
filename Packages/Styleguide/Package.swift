@@ -4,27 +4,20 @@
 import PackageDescription
 
 let package = Package(
-    name: "Onboarding",
+    name: "Styleguide",
     platforms: [.iOS(.v18), .macOS(.v14)],
     products: [
         // Products define the executables and libraries a package produces, making them visible to other packages.
-        .library(name: "Onboarding", targets: ["Onboarding"]),
-    ],
-    dependencies: [
-        .package(name: "Styleguide", path: "../Styleguide")
+        .library(
+            name: "Styleguide",
+            targets: ["Styleguide"]),
     ],
     targets: [
         // Targets are the basic building blocks of a package, defining a module or a test suite.
         // Targets can depend on other targets in this package and products from dependencies.
         .target(
-            name: "Onboarding",
-            dependencies: [
-                .product(name: "Styleguide", package: "Styleguide")
-            ]
+            name: "Styleguide"
         ),
-        .testTarget(
-            name: "OnboardingTests",
-            dependencies: ["Onboarding"]
-        ),
+
     ]
 )
