@@ -26,7 +26,7 @@ public struct CapsuleButton: View {
                 .overlay {
                     Text(title)
                         .foregroundColor(Color.regular.white)
-                        .font(Font.buttonFont)
+                        .font(Font.button.regular)
                 }
         }
     }

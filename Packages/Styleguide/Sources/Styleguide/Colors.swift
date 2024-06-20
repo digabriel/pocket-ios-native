@@ -14,11 +14,13 @@ public extension Color {
 
     struct Background {
         public let pastel = Color(.backgroundPastel)
+        public let lightGray = Color(.backgroundLightGray)
     }
 
     struct Regular {
         public let orange = Color(.orange)
         public let black = Color(.black)
         public let white = Color(.white)
+        public let gray = Color(.gray)
     }
 }

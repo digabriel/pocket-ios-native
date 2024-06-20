@@ -8,9 +8,24 @@
 import SwiftUI
 
 public extension Font {
-    public static let titleFont = Font.system(size: 24, weight: .bold)
-    public static let largeTitleFont = Font.system(size: 36, weight: .bold)
-    public static let buttonFont = Font.system(size: 20, weight: .medium)
+    static let title = Title()
+    static let text = Text()
+    static let button = Button()
+
+    struct Title {
+        public var smallRounded: Font { Font.system(size: 18, weight: .semibold, design: .rounded) }
+        public var regular: Font { Font.system(size: 24, weight: .bold) }
+        public var large: Font { Font.system(size: 36, weight: .bold) }
+        public var largeRounded: Font { Font.system(size: 36, weight: .semibold, design: .rounded) }
+    }
+    
+    struct Text {
+        public var regular: Font { Font.system(size: 18) }
+    }
+
+    struct Button {
+        public var regular: Font { Font.system(size: 20, weight: .medium) }
+    }
 }
 
 

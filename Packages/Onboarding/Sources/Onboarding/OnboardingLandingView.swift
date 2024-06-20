@@ -12,14 +12,14 @@ public struct OnboardingLandingView: View {
     public init() {}
 
     public var body: some View {
-        VStack(alignment: .center, spacing: Dimensions.shared.normal) {
+        VStack(alignment: .center, spacing: Dimensions.shared.ten) {
             Text("Welcome to Pocket")
-                .font(Font.titleFont)
+                .font(Font.title.regular)
                 .bold()
                 .foregroundStyle(Color.regular.orange)
 
             Text("Let's get your finances in order")
-                .font(Font.largeTitleFont)
+                .font(Font.title.large)
                 .bold()
                 .foregroundStyle(Color.regular.black)
 
