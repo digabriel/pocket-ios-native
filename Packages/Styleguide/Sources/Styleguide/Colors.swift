@@ -22,5 +22,6 @@ public extension Color {
         public let black = Color(.black)
         public let white = Color(.white)
         public let gray = Color(.gray)
+        public let yellow = Color(.yellow)
     }
 }

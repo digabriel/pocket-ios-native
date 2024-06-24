@@ -1,0 +1,21 @@
+{
+  "sourceLanguage" : "en",
+  "strings" : {
+    "" : {
+
+    },
+    "Bill reminders" : {
+
+    },
+    "Daily expenses" : {
+
+    },
+    "Get a reminder to add your expenses" : {
+
+    },
+    "We'll nudge you when it's time to pay the bills" : {
+
+    }
+  },
+  "version" : "1.0"
+}
