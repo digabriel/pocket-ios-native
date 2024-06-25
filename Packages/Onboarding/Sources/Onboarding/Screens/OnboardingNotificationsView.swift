@@ -7,22 +7,27 @@
 
 import SwiftUI
 import Styleguide
+import Notifications
+import SwiftData
 
 public struct OnboardingNotificationsView: View {
+    @EnvironmentObject private var mainViewModel: OnboardingMainView.ViewModel
+
     public var body: some View {
         VStack(spacing: Dimensions.shared.fourteen) {
             Spacer()
 
             Image("bell", bundle: .module)
             titleView
+                .layoutPriority(1)
             notificationsView
+                .layoutPriority(1)
 
             Spacer()
 
             CapsuleButton(title: "Continue") {}
         }
         .padding()
-        .frame(maxWidth: .infinity, maxHeight: .infinity)
         .background(Color.background.lightGray)
     }
 
@@ -40,10 +45,23 @@ public struct OnboardingNotificationsView: View {
     }
 
     private var notificationsView: some View {
-        Text("TODO: Notifications card")
+        NotificationBucketTogglerList(
+            modelContext: mainViewModel.modelContext,
+            keys: [.billReminders, .dailyExpenses]
+        )
     }
 }
 
 #Preview {
-    OnboardingNotificationsView()
+    let configuration = ModelConfiguration(isStoredInMemoryOnly: true)
+    let container = try! ModelContainer(for: NotificationBucket.self, configurations: configuration)
+
+    container.mainContext.insert(NotificationBucket(key: .billReminders, isEnabled: false))
+    container.mainContext.insert(NotificationBucket(key: .dailyExpenses, isEnabled: false))
+
+    let viewModel = OnboardingMainView.ViewModel(modelContext: container.mainContext)
+
+    return OnboardingNotificationsView()
+        .environmentObject(viewModel)
+        .modelContainer(container)
 }

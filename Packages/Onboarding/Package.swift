@@ -12,7 +12,8 @@ let package = Package(
         .library(name: "Onboarding", targets: ["Onboarding"]),
     ],
     dependencies: [
-        .package(name: "Styleguide", path: "../Styleguide")
+        .package(name: "Styleguide", path: "../Styleguide"),
+        .package(name: "Notifications", path: "../Notifications")
     ],
     targets: [
         // Targets are the basic building blocks of a package, defining a module or a test suite.
@@ -20,7 +21,8 @@ let package = Package(
         .target(
             name: "Onboarding",
             dependencies: [
-                .product(name: "Styleguide", package: "Styleguide")
+                .product(name: "Styleguide", package: "Styleguide"),
+                .product(name: "Notifications", package: "Notifications")
             ]
         ),
         .testTarget(

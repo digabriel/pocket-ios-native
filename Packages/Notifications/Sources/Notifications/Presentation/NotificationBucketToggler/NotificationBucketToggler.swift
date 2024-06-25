@@ -12,7 +12,7 @@ import Styleguide
 public struct NotificationBucketTogglerList: View {
     @State private var viewModel: ViewModel
 
-    init(modelContext: ModelContext, keys: [NotificationBucket.Key]) {
+    public init(modelContext: ModelContext, keys: [NotificationBucket.Key]) {
         let viewModel = ViewModel(modelContext: modelContext, keys: keys)
         _viewModel = State(initialValue: viewModel)
     }

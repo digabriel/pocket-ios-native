@@ -9,7 +9,7 @@ import SwiftUI
 import Styleguide
 
 public struct OnboardingLandingView: View {
-    public init() {}
+    @EnvironmentObject private var mainViewModel: OnboardingMainView.ViewModel
 
     public var body: some View {
         VStack(alignment: .center, spacing: Dimensions.shared.ten) {
@@ -26,7 +26,7 @@ public struct OnboardingLandingView: View {
             Image("landingImage", bundle: .module)
 
             CapsuleButton(title: String(localized: "Continue"), action: {
-                
+                mainViewModel.navigateNext()
             })
             .padding(.top, -50)
         }

@@ -1,6 +1,9 @@
 {
   "sourceLanguage" : "en",
   "strings" : {
+    "A little nudge?" : {
+
+    },
     "Continue" : {
       "localizations" : {
         "pt" : {
@@ -20,6 +23,9 @@
           }
         }
       }
+    },
+    "Users with notifications enabled are over 2x more likely to stick to their budgets" : {
+
     },
     "Welcome to Pocket" : {
       "localizations" : {
