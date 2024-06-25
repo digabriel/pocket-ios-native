@@ -9,20 +9,6 @@ import SwiftUI
 import Notifications
 import SwiftData
 
-enum OnboardingNavigationPath {
-    case landing
-    case notifications
-
-    var next: OnboardingNavigationPath? {
-        switch self {
-        case .landing:
-            return .notifications
-        case .notifications:
-            return nil
-        }
-    }
-}
-
 public struct OnboardingMainView: View {
     @EnvironmentObject var viewModel: ViewModel
 
@@ -41,22 +27,6 @@ public struct OnboardingMainView: View {
                             .navigationBarBackButtonHidden()
                     }
                 }
-        }
-    }
-}
-
-public extension OnboardingMainView {
-    final class ViewModel: ObservableObject {
-        @Published var navigationPath: [OnboardingNavigationPath] = [.landing]
-        let modelContext: ModelContext
-
-        public init(modelContext: ModelContext) {
-            self.modelContext = modelContext
-        }
-
-        func navigateNext() {
-            guard let nextPath = navigationPath.first?.next else { return }
-            navigationPath.append(nextPath)
         }
     }
 }
