@@ -15,6 +15,7 @@ let package = Package(
     ],
     dependencies: [
         .package(name: "Styleguide", path: "../Styleguide"),
+        .package(name: "CommonDomain", path: "../CommonDomain"),
         .package(url: "https://github.com/apple/swift-log.git", exact: "1.6.1"),
     ],
     targets: [
@@ -24,6 +25,7 @@ let package = Package(
             name: "Notifications",
             dependencies: [
                 .product(name: "Styleguide", package: "Styleguide"),
+                .product(name: "CommonDomain", package: "CommonDomain"),
                 .product(name: "Logging", package: "swift-log")
             ]),
         .testTarget(
