@@ -23,7 +23,7 @@ public struct OnboardingMainView: View {
                         OnboardingLandingView()
                             .navigationBarBackButtonHidden()
                     case .notifications:
-                        OnboardingNotificationsView()
+                        OnboardingNotificationsView(modelContext: viewModel.modelContext)
                             .navigationBarBackButtonHidden()
                     }
                 }

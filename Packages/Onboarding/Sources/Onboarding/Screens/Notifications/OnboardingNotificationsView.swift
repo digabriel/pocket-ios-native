@@ -11,7 +11,13 @@ import Notifications
 import SwiftData
 
 public struct OnboardingNotificationsView: View {
+    @State private var viewModel: ViewModel
     @EnvironmentObject private var mainViewModel: OnboardingMainView.ViewModel
+
+    init(modelContext: ModelContext) {
+        let viewModel = ViewModel(modelContext: modelContext)
+        _viewModel = State(initialValue: viewModel)
+    }
 
     public var body: some View {
         VStack(spacing: Dimensions.shared.fourteen) {
@@ -25,10 +31,25 @@ public struct OnboardingNotificationsView: View {
 
             Spacer()
 
-            CapsuleButton(title: "Continue") {}
+            CapsuleButton(title: "Continue") {
+                Task {
+                    await viewModel.registerForNotifications()
+                }
+            }
         }
         .padding()
         .background(Color.background.lightGray)
+        .onChange(of: viewModel.notificationRegistrationStatus) { _, newValue in
+            switch newValue {
+            case .granted:
+                mainViewModel.navigateNext()
+            case .denied:
+                break
+            // TODO: Show alert for the denied case
+            case .notDetermined:
+                break
+            }
+        }
     }
 
     private var titleView: some View {
@@ -46,7 +67,7 @@ public struct OnboardingNotificationsView: View {
 
     private var notificationsView: some View {
         NotificationBucketTogglerList(
-            modelContext: mainViewModel.modelContext,
+            modelContext: viewModel.modelContext,
             keys: [.billReminders, .dailyExpenses]
         )
     }
@@ -59,9 +80,9 @@ public struct OnboardingNotificationsView: View {
     container.mainContext.insert(NotificationBucket(key: .billReminders, isEnabled: false))
     container.mainContext.insert(NotificationBucket(key: .dailyExpenses, isEnabled: false))
 
-    let viewModel = OnboardingMainView.ViewModel(modelContext: container.mainContext)
+    let mainViewModel = OnboardingMainView.ViewModel(modelContext: container.mainContext)
 
-    return OnboardingNotificationsView()
-        .environmentObject(viewModel)
+    return OnboardingNotificationsView(modelContext: container.mainContext)
         .modelContainer(container)
+        .environmentObject(mainViewModel)
 }

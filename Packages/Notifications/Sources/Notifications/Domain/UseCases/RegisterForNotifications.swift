@@ -8,10 +8,9 @@
 import CommonDomain
 import UserNotifications
 
-public struct RegisterForNotifications: UseCase {
-    public typealias Input = Void
-    public typealias Output = NotificationRegistrationStatus
+public protocol RegisterForNotificationsUseCaseProtocol: UseCase where Input == Void, Output == NotificationRegistrationStatus {}
 
+public struct RegisterForNotificationsUseCase: RegisterForNotificationsUseCaseProtocol {
     let repository: NotificationsRegistrationStatusFetching & NotificationsRegistrationStatusCreating
 
     public func execute(input: Void) async -> NotificationRegistrationStatus {
@@ -25,7 +24,7 @@ public struct RegisterForNotifications: UseCase {
     }
 }
 
-private extension RegisterForNotifications {
+private extension RegisterForNotificationsUseCase {
     func askForRegistration() async -> NotificationRegistrationStatus {
         do {
             let result = try await repository.registerForNotifications()

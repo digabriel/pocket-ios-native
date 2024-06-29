@@ -8,7 +8,7 @@
 import UserNotifications
 
 public struct NotificationsUseCaseFactory {
-    public static func makeRegistrationUseCase() -> RegisterForNotifications {
+    public static func makeRegistrationUseCase() -> RegisterForNotificationsUseCase {
         .init(repository: UNUserNotificationCenter.current())
     }
 }
