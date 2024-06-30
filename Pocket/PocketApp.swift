@@ -13,6 +13,8 @@ import SwiftData
 @main
 struct PocketApp: App {
     let container: ModelContainer
+    @State private var isLoading = true
+    @State private var isOnboardingDone = false
 
     init() {
         do {
@@ -28,9 +30,30 @@ struct PocketApp: App {
 
     var body: some Scene {
         WindowGroup {
-            OnboardingMainView()
-                .environmentObject(OnboardingMainView.ViewModel(modelContext: container.mainContext))
+            if isLoading {
+                Text("Loading")
+                    .task { await loadOnboardingStatus() }
+            } else {
+                if isOnboardingDone {
+                    Text("Onboarding Done")
+                } else {
+                    onboardingView
+                }
+            }
         }
         .modelContainer(container)
+    }
+
+    private func loadOnboardingStatus() async {
+        isOnboardingDone = (try? await OnboardingUseCaseFactory.makeIsOnboardingDone().execute(input: ())) ?? false
+        isLoading = false
+    }
+
+    private var onboardingView: some View {
+        OnboardingMainView()
+            .environmentObject(OnboardingMainView.ViewModel(
+                modelContext: container.mainContext,
+                dependency: .init(setOnboardingDoneUseCase: OnboardingUseCaseFactory.makeSetOnboardingDone())
+            ))
     }
 }

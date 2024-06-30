@@ -80,7 +80,10 @@ public struct OnboardingNotificationsView: View {
     container.mainContext.insert(NotificationBucket(key: .billReminders, isEnabled: false))
     container.mainContext.insert(NotificationBucket(key: .dailyExpenses, isEnabled: false))
 
-    let mainViewModel = OnboardingMainView.ViewModel(modelContext: container.mainContext)
+    let mainViewModel = OnboardingMainView.ViewModel(
+        modelContext: container.mainContext,
+        dependency: .init(setOnboardingDoneUseCase: SetOnboardingDoneUseCasePreview())
+    )
 
     return OnboardingNotificationsView(modelContext: container.mainContext)
         .modelContainer(container)
