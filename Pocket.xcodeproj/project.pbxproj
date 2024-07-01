@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		135757852C322E59007D31FF /* MainTabBarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 135757842C322E50007D31FF /* MainTabBarView.swift */; };
+		135757882C3238EF007D31FF /* Wallets in Frameworks */ = {isa = PBXBuildFile; productRef = 135757872C3238EF007D31FF /* Wallets */; };
 		1386A0B02C235887005DC757 /* Onboarding in Frameworks */ = {isa = PBXBuildFile; productRef = 1386A0AF2C235887005DC757 /* Onboarding */; };
 		13960F7B2C234D9C00D932D6 /* PocketApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 13960F7A2C234D9C00D932D6 /* PocketApp.swift */; };
 		13960F7F2C234D9E00D932D6 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 13960F7E2C234D9E00D932D6 /* Assets.xcassets */; };
@@ -34,6 +36,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		135757842C322E50007D31FF /* MainTabBarView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainTabBarView.swift; sourceTree = "<group>"; };
 		13960F772C234D9C00D932D6 /* Pocket.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Pocket.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		13960F7A2C234D9C00D932D6 /* PocketApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PocketApp.swift; sourceTree = "<group>"; };
 		13960F7E2C234D9E00D932D6 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -53,6 +56,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				1386A0B02C235887005DC757 /* Onboarding in Frameworks */,
+				135757882C3238EF007D31FF /* Wallets in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -73,6 +77,14 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		135757832C322E44007D31FF /* MainTabBar */ = {
+			isa = PBXGroup;
+			children = (
+				135757842C322E50007D31FF /* MainTabBarView.swift */,
+			);
+			path = MainTabBar;
+			sourceTree = "<group>";
+		};
 		13960F6E2C234D9C00D932D6 = {
 			isa = PBXGroup;
 			children = (
@@ -97,6 +109,7 @@
 		13960F792C234D9C00D932D6 /* Pocket */ = {
 			isa = PBXGroup;
 			children = (
+				135757832C322E44007D31FF /* MainTabBar */,
 				13960F7A2C234D9C00D932D6 /* PocketApp.swift */,
 				13960F7E2C234D9E00D932D6 /* Assets.xcassets */,
 				13960F802C234D9E00D932D6 /* Pocket.entitlements */,
@@ -148,6 +161,7 @@
 			name = Pocket;
 			packageProductDependencies = (
 				1386A0AF2C235887005DC757 /* Onboarding */,
+				135757872C3238EF007D31FF /* Wallets */,
 			);
 			productName = Pocket;
 			productReference = 13960F772C234D9C00D932D6 /* Pocket.app */;
@@ -223,6 +237,7 @@
 			mainGroup = 13960F6E2C234D9C00D932D6;
 			packageReferences = (
 				1386A0AE2C235887005DC757 /* XCLocalSwiftPackageReference "Packages/Onboarding" */,
+				135757862C3238EF007D31FF /* XCLocalSwiftPackageReference "Packages/Wallets" */,
 			);
 			productRefGroup = 13960F782C234D9C00D932D6 /* Products */;
 			projectDirPath = "";
@@ -267,6 +282,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				13960F7B2C234D9C00D932D6 /* PocketApp.swift in Sources */,
+				135757852C322E59007D31FF /* MainTabBarView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -629,6 +645,10 @@
 /* End XCConfigurationList section */
 
 /* Begin XCLocalSwiftPackageReference section */
+		135757862C3238EF007D31FF /* XCLocalSwiftPackageReference "Packages/Wallets" */ = {
+			isa = XCLocalSwiftPackageReference;
+			relativePath = Packages/Wallets;
+		};
 		1386A0AE2C235887005DC757 /* XCLocalSwiftPackageReference "Packages/Onboarding" */ = {
 			isa = XCLocalSwiftPackageReference;
 			relativePath = Packages/Onboarding;
@@ -636,6 +656,10 @@
 /* End XCLocalSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
+		135757872C3238EF007D31FF /* Wallets */ = {
+			isa = XCSwiftPackageProductDependency;
+			productName = Wallets;
+		};
 		1386A0AF2C235887005DC757 /* Onboarding */ = {
 			isa = XCSwiftPackageProductDependency;
 			productName = Onboarding;

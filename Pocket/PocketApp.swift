@@ -35,7 +35,7 @@ struct PocketApp: App {
                     .task { await loadOnboardingStatus() }
             } else {
                 if isOnboardingDone {
-                    Text("Onboarding Done")
+                    MainTabBarView()
                 } else {
                     onboardingView
                 }
