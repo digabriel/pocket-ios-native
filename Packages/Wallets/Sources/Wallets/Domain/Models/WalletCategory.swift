@@ -7,7 +7,7 @@
 
 import SwiftData
 
-@Model public struct WalletCategory {
+@Model public class WalletCategory {
     enum Value: String, Codable, CaseIterable {
         case spending
         case savings

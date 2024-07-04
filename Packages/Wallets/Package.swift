@@ -13,7 +13,9 @@ let package = Package(
             targets: ["Wallets"]),
     ],
     dependencies: [
-        .package(name: "Styleguide", path: "../Styleguide")
+        .package(name: "Styleguide", path: "../Styleguide"),
+        .package(name: "CommonDomain", path: "../CommonDomain"),
+        .package(url: "https://github.com/apple/swift-log.git", exact: "1.6.1")
     ],
     targets: [
         // Targets are the basic building blocks of a package, defining a module or a test suite.
@@ -22,6 +24,8 @@ let package = Package(
             name: "Wallets",
             dependencies: [
                 .product(name: "Styleguide", package: "Styleguide"),
+                .product(name: "CommonDomain", package: "CommonDomain"),
+                .product(name: "Logging", package: "swift-log")
             ]),
         .testTarget(
             name: "WalletsTests",

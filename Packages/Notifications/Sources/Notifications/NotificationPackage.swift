@@ -8,17 +8,13 @@
 import Foundation
 import SwiftData
 import Logging
+import CommonDomain
 
-public final class NotificationPackage {
+public final class NotificationPackage: PackageConfigurator {
     private let logger = Logger(label: "net.dimasgabriel.Pocket.Notifications")
     private let modelContext: ModelContext
 
-    public init?(modelContainer: ModelContainer? = try? ModelContainer(for: NotificationBucket.self)) {
-        guard let modelContainer else {
-            logger.error("Invalid model container")
-            return nil
-        }
-
+    public init(modelContainer: ModelContainer) {
         modelContext = ModelContext(modelContainer)
         modelContext.autosaveEnabled = true
     }

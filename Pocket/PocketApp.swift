@@ -9,6 +9,7 @@ import SwiftUI
 import Onboarding
 import Notifications
 import SwiftData
+import Wallets
 
 @main
 struct PocketApp: App {
@@ -18,10 +19,12 @@ struct PocketApp: App {
 
     init() {
         do {
-            container = try ModelContainer(for: NotificationBucket.self)
+            let container = try ModelContainer(for: NotificationBucket.self, WalletCategory.self)
+            self.container = container
 
             Task {
-                await NotificationPackage()?.setupData()
+                await NotificationPackage(modelContainer: container).setupData()
+                await WalletsPackage(modelContainer: container).setupData()
             }
         } catch {
             fatalError("Failed to create ModelContainer.")
