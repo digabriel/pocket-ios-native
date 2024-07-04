@@ -17,11 +17,13 @@ public extension Font {
         public var regular: Font { Font.system(size: 24, weight: .bold) }
         public var large: Font { Font.system(size: 36, weight: .bold) }
         public var largeRounded: Font { Font.system(size: 36, weight: .semibold, design: .rounded) }
+        public var largerRounded: Font { Font.system(size: 48, weight: .semibold, design: .rounded) }
     }
     
     struct Text {
         public var regular: Font { Font.system(size: 18) }
         public var small: Font { Font.system(size: 16) }
+        public var smaller: Font { Font.system(size: 14) }
     }
 
     struct Button {

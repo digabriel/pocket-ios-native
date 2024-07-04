@@ -15,6 +15,8 @@ public extension Color {
     struct Background {
         public let pastel = Color(ColorResource.backgroundPastel)
         public let lightGray = Color(ColorResource.backgroundLightGray)
+        public let darkPink = Color(ColorResource.backgroundDarkPink)
+        public let lightPink = Color(ColorResource.backgroundLightPink)
     }
 
     struct Regular {

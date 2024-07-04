@@ -10,6 +10,8 @@ import Foundation
 public struct Dimensions {
     public static let shared = Dimensions()
 
+    public let one: CGFloat = 3
+    public let two: CGFloat = 6
     public let three: CGFloat = 8
     public let five: CGFloat = 12
     public let eight: CGFloat = 20
