@@ -7,13 +7,16 @@
 
 import SwiftUI
 import Styleguide
+import SwiftData
 
 public struct WalletsMainView: View {
-    @State private var viewModel: ViewModel = .init()
+    @State private var viewModel: ViewModel
     @State private var scrollYOffset: CGFloat = 0
     @State private var headerHeight: CGFloat = 0
 
-    public init() {}
+    public init(dependency: Dependency) {
+        _viewModel = .init(initialValue: .init(dependency: dependency))
+    }
 
     public var body: some View {
         ZStack(alignment: .topLeading) {
@@ -42,8 +45,8 @@ public struct WalletsMainView: View {
                         .padding(.horizontal, Dimensions.shared.eight)
                         .padding(.top, Dimensions.shared.three)
 
-                    WalletsSummaryView()
-                        .padding(.bottom, Dimensions.shared.fourteen + scrollYOffset / 2.0)
+                    WalletsSummaryView(viewModel: viewModel.childrenViewModels.walletsSummary)
+                        .padding(.bottom, Dimensions.shared.five + scrollYOffset / 2.0)
                         .padding(.top, Dimensions.shared.one + scrollYOffset / 2.0)
                         .opacity(scrollYOffset < 0 ? 1.0 - ((scrollYOffset * -1) / 100.0) : 1)
                 }
@@ -91,7 +94,12 @@ public struct WalletsMainView: View {
 }
 
 #Preview {
-    WalletsMainView()
+    let dependency = WalletsMainView.Dependency(
+        getWalletCategoriesUseCase: GetWalletCategoriesPreview(),
+        getMoneyForWalletCategoryUseCase: GetMoneyForWalletCategoryPreview()
+    )
+
+    WalletsMainView(dependency: dependency)
 }
 
 private struct ScrollViewOffsetKey: PreferenceKey {

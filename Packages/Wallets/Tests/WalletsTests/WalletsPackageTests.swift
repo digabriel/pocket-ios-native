@@ -3,24 +3,15 @@ import SwiftData
 @testable import Wallets
 
 struct WalletsPackageTests {
-    private let modelContainer: ModelContainer
-
-    init() throws {
-        let modelConfiguration = ModelConfiguration(for: WalletCategory.self, isStoredInMemoryOnly: true)
-        self.modelContainer = try ModelContainer(for: WalletCategory.self, configurations: modelConfiguration)
-    }
-
-    private var modelContext: ModelContext {
-        return ModelContext(modelContainer)
-    }
-
     @Test func setupDataInsertsWalletsCategories() async throws {
-        let sut = WalletsPackage.init(modelContainer: modelContainer)
+        let repository = InMemoryWalletCategoriesRepository()
+        let useCase = CreateWalletCategoriesUseCase(repository: repository)
+
+        let sut = WalletsPackage.init(createWalletCategories: useCase)
         await sut.setupData()
         
-        let descriptor = FetchDescriptor<WalletCategory>()
-        let insertedCategories = try modelContext.fetch(descriptor).map { $0.value }
-        #expect(Set(insertedCategories) == Set(WalletCategory.Value.allCases))
+        let allCategories = try await repository.getAll()
+        #expect(allCategories.sorted() == WalletCategory.allCases.sorted())
     }
 }
 

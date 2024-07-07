@@ -8,6 +8,5 @@
 import SwiftData
 
 public protocol PackageConfigurator {
-    init(modelContainer: ModelContainer)
     func setupData() async
 }

@@ -5,18 +5,29 @@
 //  Created by Dimas Gabriel on 7/4/24.
 //
 
-import SwiftData
+public enum WalletCategory: Int, CaseIterable {
+    case spending = 0
+    case savings = 1
+    case debt = 2
 
-@Model public class WalletCategory {
-    enum Value: String, Codable, CaseIterable {
-        case spending
-        case savings
-        case debt
+    public var title: String {
+        switch self {
+        case .spending:
+            "Spending Wallets"
+        case .savings:
+            "Savings Wallets"
+        case .debt:
+            "Debt Wallets"
+        }
     }
+}
 
-    let value: Value
-
-    init(value: Value) {
-        self.value = value
+extension WalletCategory: Comparable {
+    public static func < (lhs: WalletCategory, rhs: WalletCategory) -> Bool {
+        lhs.rawValue < rhs.rawValue
     }
+}
+
+public enum WalletCategoryError: Error {
+    case invalidRawValue
 }

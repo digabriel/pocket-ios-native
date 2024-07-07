@@ -10,7 +10,7 @@ import SwiftData
 import Logging
 import CommonDomain
 
-public final class NotificationPackage: PackageConfigurator {
+public struct NotificationPackage: PackageConfigurator, Sendable {
     private let logger = Logger(label: "net.dimasgabriel.Pocket.Notifications")
     private let modelContext: ModelContext
 
@@ -18,7 +18,7 @@ public final class NotificationPackage: PackageConfigurator {
         modelContext = ModelContext(modelContainer)
         modelContext.autosaveEnabled = true
     }
-
+    
     public func setupData() async {
         await buildNotificationsBucket()
     }
