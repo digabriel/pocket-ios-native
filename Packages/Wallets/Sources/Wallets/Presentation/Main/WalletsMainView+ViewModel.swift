@@ -28,7 +28,10 @@ public extension WalletsMainView {
         let getWalletCategoriesUseCase: any GetWalletCategoriesProtocol
         let getMoneyForWalletCategoryUseCase: any GetMoneyForWalletCategoryProtocol
 
-        public init(getWalletCategoriesUseCase: any GetWalletCategoriesProtocol, getMoneyForWalletCategoryUseCase: any GetMoneyForWalletCategoryProtocol) {
+        public init(
+            getWalletCategoriesUseCase: any GetWalletCategoriesProtocol,
+            getMoneyForWalletCategoryUseCase: any GetMoneyForWalletCategoryProtocol
+        ) {
             self.getWalletCategoriesUseCase = getWalletCategoriesUseCase
             self.getMoneyForWalletCategoryUseCase = getMoneyForWalletCategoryUseCase
         }

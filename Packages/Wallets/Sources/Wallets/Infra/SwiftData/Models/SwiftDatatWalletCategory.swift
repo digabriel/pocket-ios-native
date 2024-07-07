@@ -27,4 +27,3 @@ extension SwiftDataWalletCategory {
         self.init(identifier: domainModel.rawValue)
     }
 }
-

@@ -22,7 +22,7 @@ struct SwiftDataWalletsRepositoryTests {
     @Test func testGetAllByCategory() async throws {
         let context = ModelContext(modelContainer)
         let category = SwiftDataWalletCategory(identifier: 0)
-        let wallets: [SwiftDataWallet] = [
+        let _: [SwiftDataWallet] = [
             try .mock(category: category, insertedIn: context),
             try .mock(category: category, insertedIn: context)
         ]

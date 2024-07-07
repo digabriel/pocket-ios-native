@@ -31,7 +31,6 @@ struct SwiftDatatWalletCategoriesRepositoryTests {
     }
 
     @Test func shouldCreatwWithSuccess() async throws {
-        let allCategoriesIdentifier = WalletCategory.allCases.map { $0.rawValue }
         let context = ModelContext(modelContainer)
 
         try await sut.create(category: .savings)

@@ -74,4 +74,3 @@ struct WalletsSummaryView: View {
         .padding()
         .background(Color.red)
 }
-

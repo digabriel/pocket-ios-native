@@ -33,7 +33,8 @@ import SwiftUI
 
     private func buildWalletCategories() async {
         do {
-            let createWalletCategories = CreateWalletCategoriesUseCase(repository: swiftDataRepositories.walletCategoriesRepository)
+            let repository = swiftDataRepositories.walletCategoriesRepository
+            let createWalletCategories = CreateWalletCategoriesUseCase(repository: repository)
             try await createWalletCategories.execute(input: ())
             logger.info("Created missing wallet categories")
         } catch {

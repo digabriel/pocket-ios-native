@@ -8,4 +8,3 @@
 protocol WalletsRepositoryProtocol {
     func getAllByCategory(_ category: WalletCategory) async throws -> [Wallet]
 }
-

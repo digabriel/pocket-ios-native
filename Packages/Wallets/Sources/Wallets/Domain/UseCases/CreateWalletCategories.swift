@@ -16,7 +16,7 @@ public final class CreateWalletCategoriesUseCase: CreateWalletCategoriesProtocol
         self.repository = repository
     }
 
-    public func execute(input: ()) async throws -> () {
+    public func execute(input: ()) async throws {
         let allCategories = Set(WalletCategory.allCases)
         let existingCategories = Set(try await repository.getAll())
 

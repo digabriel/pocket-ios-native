@@ -21,7 +21,7 @@ extension WalletsSummaryView {
             do {
                 var items: [Model] = []
                 let walletCategories = try await dependency.getWalletCategoriesUseCase.execute(input: ())
-                
+
                 for category in walletCategories {
                     let categoryAmount = try await dependency.getMoneyForWalletCategoryUseCase.execute(input: category)
                     items.append(.init(amount: categoryAmount, title: category.title, category: category))
@@ -48,7 +48,10 @@ extension WalletsSummaryView {
         let getWalletCategoriesUseCase: any GetWalletCategoriesProtocol
         let getMoneyForWalletCategoryUseCase: any GetMoneyForWalletCategoryProtocol
 
-        init(getWalletCategoriesUseCase: any GetWalletCategoriesProtocol, getMoneyForWalletCategoryUseCase: any GetMoneyForWalletCategoryProtocol) {
+        init(
+            getWalletCategoriesUseCase: any GetWalletCategoriesProtocol,
+            getMoneyForWalletCategoryUseCase: any GetMoneyForWalletCategoryProtocol
+        ) {
             self.getWalletCategoriesUseCase = getWalletCategoriesUseCase
             self.getMoneyForWalletCategoryUseCase = getMoneyForWalletCategoryUseCase
         }

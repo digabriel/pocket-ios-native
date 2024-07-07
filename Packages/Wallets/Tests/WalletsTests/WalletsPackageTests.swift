@@ -4,13 +4,15 @@ import SwiftData
 
 struct WalletsPackageTests {
     @Test func setupDataInsertsWalletsCategories() async throws {
-        let repository = InMemoryWalletCategoriesRepository()
-        let useCase = CreateWalletCategoriesUseCase(repository: repository)
+        let config = ModelConfiguration(isStoredInMemoryOnly: true)
+        let container = try ModelContainer(for: SwiftDataWallet.self, configurations: config)
+        let context = ModelContext(container)
 
-        let sut = WalletsPackage.init(createWalletCategories: useCase)
+        let sut = SwiftUIWalletsPackage(swiftDataContainer: container)
         await sut.setupData()
         
-        let allCategories = try await repository.getAll()
+        let fetchAllCategories = FetchDescriptor<SwiftDataWalletCategory>()
+        let allCategories = try context.fetch(fetchAllCategories).map { try $0.toDomain() }
         #expect(allCategories.sorted() == WalletCategory.allCases.sorted())
     }
 }

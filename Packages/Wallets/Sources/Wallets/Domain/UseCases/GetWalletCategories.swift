@@ -16,7 +16,7 @@ public final class GetWalletCategoriesUseCase: GetWalletCategoriesProtocol {
         self.repository = repository
     }
 
-    public func execute(input: Void) async throws -> Array<WalletCategory> {
+    public func execute(input: Void) async throws -> [WalletCategory] {
         return try await self.repository.getAll()
     }
 }

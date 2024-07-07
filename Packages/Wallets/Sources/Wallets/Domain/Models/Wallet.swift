@@ -11,9 +11,4 @@ import CommonDomain
 public struct Wallet {
     public let category: WalletCategory
     public let amount: Money
-
-    init(category: WalletCategory, amount: Money) {
-        self.category = category
-        self.amount = amount
-    }
 }

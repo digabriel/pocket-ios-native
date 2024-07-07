@@ -6,7 +6,7 @@
 //
 
 final class GetWalletCategoriesPreview: GetWalletCategoriesProtocol {
-    func execute(input: ()) async throws -> Array<WalletCategory> {
+    func execute(input: ()) async throws -> [WalletCategory] {
         return WalletCategory.allCases
     }
 }

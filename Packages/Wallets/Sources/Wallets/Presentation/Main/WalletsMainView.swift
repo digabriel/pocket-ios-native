@@ -31,7 +31,10 @@ public struct WalletsMainView: View {
                 .background(
                     GeometryReader { proxy in
                         Color.clear
-                            .preference(key: ScrollViewOffsetKey.self, value: proxy.frame(in: .scrollView(axis: .vertical)).origin.y)
+                            .preference(
+                                key: ScrollViewOffsetKey.self,
+                                value: proxy.frame(in: .scrollView(axis: .vertical)).origin.y
+                            )
                     }
                 )
                 .onPreferenceChange(ScrollViewOffsetKey.self) { offset in
@@ -86,7 +89,11 @@ public struct WalletsMainView: View {
     }
 
     private var headerBackground: some View {
-        LinearGradient(gradient: Gradient(colors: [Color.background.lightPink, Color.background.darkPink]), startPoint: .topLeading, endPoint: .bottomTrailing)
+        LinearGradient(
+            gradient: Gradient(colors: [Color.background.lightPink, Color.background.darkPink]),
+            startPoint: .topLeading,
+            endPoint: .bottomTrailing
+        )
             .shadow(radius: 10)
             .mask(Rectangle().padding(.bottom, -30))
             .ignoresSafeArea()
