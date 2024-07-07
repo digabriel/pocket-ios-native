@@ -1,5 +1,5 @@
 //
-//  GetAmountForWalletCategory.swift
+//  GetMoneyForWalletCategory.swift
 //  
 //
 //  Created by Dimas Gabriel on 7/5/24.

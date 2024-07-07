@@ -17,6 +17,8 @@ public final class GetWalletCategoriesUseCase: GetWalletCategoriesProtocol {
     }
 
     public func execute(input: Void) async throws -> [WalletCategory] {
-        return try await self.repository.getAll()
+        return try await self.repository
+            .getAll()
+            .sorted()
     }
 }

@@ -27,17 +27,17 @@ struct SwiftDatatWalletCategoriesRepositoryTests {
 
         let fetchedCategories = try await sut.getAll()
 
-        #expect(fetchedCategories.map { $0.rawValue } == categories.map { $0.identifier }.sorted())
+        #expect(Set(fetchedCategories.map { $0.rawValue }) == Set(categories.map { $0.identifier }))
     }
 
-    @Test func shouldCreatwWithSuccess() async throws {
+    @Test func shouldCreateWithSuccess() async throws {
         let context = ModelContext(modelContainer)
 
         try await sut.create(category: .savings)
         let fetchAll = FetchDescriptor<SwiftDataWalletCategory>()
         let fetchedCategories = try context.fetch(fetchAll)
 
-        #expect(fetchedCategories == [.init(domainModel: .savings)])
+        #expect(fetchedCategories.map { $0.identifier } == [WalletCategory.savings.rawValue])
     }
 }
 

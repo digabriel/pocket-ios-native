@@ -13,7 +13,6 @@ actor SwiftDataWalletCategoriesRepository: WalletCategoriesRepositoryProtocol {
         let fetchCategories = FetchDescriptor<SwiftDataWalletCategory>()
         return try modelContext.fetch(fetchCategories)
             .map { try $0.toDomain() }
-            .sorted()
     }
 
     func create(category: WalletCategory) async throws {
