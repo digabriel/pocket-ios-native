@@ -22,12 +22,15 @@ public struct WalletsMainView: View {
         ZStack(alignment: .topLeading) {
             ScrollView(showsIndicators: false) {
                 VStack {
-                    ForEach(0..<100) { _ in
-                        Text("Testing")
-                            .padding()
-                    }
+                    CircularTitledButton(
+                        action: {},
+                        icon: { Image(systemName: "plus") },
+                        title: String(localized: "New Wallet")
+                    )
                 }
+                .frame(maxWidth: .infinity, maxHeight: .infinity)
                 .padding(.top, headerHeight)
+                .padding(Dimensions.shared.seventeen)
                 .background(
                     GeometryReader { proxy in
                         Color.clear

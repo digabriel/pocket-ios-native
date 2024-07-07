@@ -25,5 +25,6 @@ public extension Color {
         public let white = Color(ColorResource.white)
         public let gray = Color(ColorResource.gray)
         public let yellow = Color(ColorResource.yellow)
+        public let dark = Color(ColorResource.dark)
     }
 }
