@@ -13,6 +13,7 @@ public struct WalletsMainView: View {
     @State private var viewModel: ViewModel
     @State private var scrollYOffset: CGFloat = 0
     @State private var headerHeight: CGFloat = 0
+    @State private var isCreateWalletVisible = false
 
     public init(dependency: Dependency) {
         _viewModel = .init(initialValue: .init(dependency: dependency))
@@ -23,7 +24,7 @@ public struct WalletsMainView: View {
             ScrollView(showsIndicators: false) {
                 VStack {
                     CircularTitledButton(
-                        action: {},
+                        action: { isCreateWalletVisible = true },
                         icon: { Image(systemName: "plus") },
                         title: String(localized: "New Wallet")
                     )
@@ -68,6 +69,9 @@ public struct WalletsMainView: View {
                     self.headerHeight = headerHeight
                 }
             }
+        }
+        .sheet(isPresented: $isCreateWalletVisible) {
+            CreateWalletNavigationStack()
         }
     }
 
