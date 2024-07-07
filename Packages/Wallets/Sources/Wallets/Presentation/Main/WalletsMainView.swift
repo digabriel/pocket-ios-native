@@ -22,8 +22,8 @@ public struct WalletsMainView: View {
         ZStack(alignment: .topLeading) {
             ScrollView(showsIndicators: false) {
                 VStack {
-                    ForEach(0..<100) { number in
-                        Text("\(number)")
+                    ForEach(0..<100) { _ in
+                        Text("Testing")
                             .padding()
                     }
                 }
