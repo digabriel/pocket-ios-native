@@ -71,7 +71,7 @@ public struct WalletsMainView: View {
             }
         }
         .sheet(isPresented: $isCreateWalletVisible) {
-            CreateWalletNavigationStack()
+            CreateWalletNavigationStack(viewModel: viewModel.childrenViewModels.createWallet)
         }
     }
 

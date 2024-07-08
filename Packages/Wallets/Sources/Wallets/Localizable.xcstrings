@@ -1,16 +1,19 @@
 {
   "sourceLanguage" : "en",
   "strings" : {
-    "Debt Wallets" : {
+    "Create Wallet" : {
 
     },
-    "Savings Wallets" : {
+    "Debt" : {
 
     },
-    "Spending Wallets" : {
+    "New Wallet" : {
 
     },
-    "Testing" : {
+    "Savings" : {
+
+    },
+    "Spending" : {
 
     },
     "WALLETS" : {

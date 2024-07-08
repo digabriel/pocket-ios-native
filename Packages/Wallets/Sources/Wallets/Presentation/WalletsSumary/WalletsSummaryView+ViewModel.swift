@@ -24,7 +24,7 @@ extension WalletsSummaryView {
 
                 for category in walletCategories {
                     let categoryAmount = try await dependency.getMoneyForWalletCategoryUseCase.execute(input: category)
-                    items.append(.init(amount: categoryAmount, title: category.title, category: category))
+                    items.append(.init(amount: categoryAmount, title: category.name, category: category))
                 }
 
                 self.items = items

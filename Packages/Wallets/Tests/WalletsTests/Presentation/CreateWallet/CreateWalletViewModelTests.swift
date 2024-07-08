@@ -9,9 +9,23 @@ import Testing
 @testable import Wallets
 
 struct CreateWalletViewModelTests {
-    @Test func shouldOutputWalletCategoriesAsSections() {
-        let sut = CreateWalletView.ViewModel()
+    private let walletCategoriesRepository = InMemoryWalletCategoriesRepository()
+    
+    private func makeSut() -> CreateWalletNavigationStack.ViewModel {
+        let getWalletCategories = GetWalletCategoriesUseCase(repository: walletCategoriesRepository)
+        let dependency = CreateWalletNavigationStack.Dependency(getWalletCategoriesUseCase: getWalletCategories)
+        return CreateWalletNavigationStack.ViewModel(dependency: dependency)
+    }
 
-        #expect(sut.sections.count == WalletCategory.allCases.count)
+    @Test func shouldOutputWalletCategoriesAsSections() async throws {
+        try await walletCategoriesRepository.create(category: .savings)
+        try await walletCategoriesRepository.create(category: .debt)
+        
+        let sut = makeSut()
+        await sut.refresh()
+
+        #expect(sut.sections.count == 2)
+        #expect(sut.sections[0].title == "Savings")
+        #expect(sut.sections[1].title == "Debt")
     }
 }

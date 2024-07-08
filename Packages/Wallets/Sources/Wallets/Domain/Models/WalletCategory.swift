@@ -10,14 +10,14 @@ public enum WalletCategory: Int, CaseIterable {
     case savings = 1
     case debt = 2
 
-    public var title: String {
+    public var name: String {
         switch self {
         case .spending:
-            String(localized: "Spending Wallets")
+            String(localized: "Spending")
         case .savings:
-            String(localized: "Savings Wallets")
+            String(localized: "Savings")
         case .debt:
-            String(localized: "Debt Wallets")
+            String(localized: "Debt")
         }
     }
 }

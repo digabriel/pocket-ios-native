@@ -16,9 +16,17 @@ extension WalletsMainView {
                 getWalletCategoriesUseCase: dependency.getWalletCategoriesUseCase,
                 getMoneyForWalletCategoryUseCase: dependency.getMoneyForWalletCategoryUseCase
             )
+            let createWalletDependency = CreateWalletNavigationStack.Dependency(
+                getWalletCategoriesUseCase: dependency.getWalletCategoriesUseCase
+            )
 
             let walletsSummaryViewModel = WalletsSummaryView.ViewModel(dependency: walletsSummaryDependency)
-            self.childrenViewModels = .init(walletsSummary: walletsSummaryViewModel)
+            let createWalletViewModel = CreateWalletNavigationStack.ViewModel(dependency: createWalletDependency)
+
+            self.childrenViewModels = .init(
+                walletsSummary: walletsSummaryViewModel,
+                createWallet: createWalletViewModel
+            )
         }
     }
 }
@@ -41,5 +49,6 @@ public extension WalletsMainView {
 extension WalletsMainView.ViewModel {
     struct Children {
         let walletsSummary: WalletsSummaryView.ViewModel
+        let createWallet: CreateWalletNavigationStack.ViewModel
     }
 }
