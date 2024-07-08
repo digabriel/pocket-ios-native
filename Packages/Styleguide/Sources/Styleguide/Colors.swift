@@ -11,6 +11,7 @@ import Foundation
 public extension Color {
     static let background = Background()
     static let regular = Regular()
+    static let wallet = Wallet()
 
     struct Background {
         public let pastel = Color(ColorResource.backgroundPastel)
@@ -26,5 +27,9 @@ public extension Color {
         public let gray = Color(ColorResource.gray)
         public let yellow = Color(ColorResource.yellow)
         public let dark = Color(ColorResource.dark)
+    }
+
+    struct Wallet {
+        public let accent = Color(ColorResource.walletsAccent)
     }
 }
