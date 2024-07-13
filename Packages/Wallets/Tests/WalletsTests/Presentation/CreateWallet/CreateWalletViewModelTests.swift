@@ -8,6 +8,7 @@
 import Testing
 @testable import Wallets
 
+@MainActor  
 struct CreateWalletViewModelTests {
     private let walletCategoriesRepository = InMemoryWalletCategoriesRepository()
     

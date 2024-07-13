@@ -9,6 +9,7 @@
 import Testing
 import CommonDomain
 
+@MainActor
 struct WalletsSummaryViewModelTests {
     private let walletCategoriesRepository = InMemoryWalletCategoriesRepository()
     private let walletsRepository = InMemoryWalletsRepository()

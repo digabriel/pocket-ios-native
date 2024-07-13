@@ -9,6 +9,7 @@
 import Testing
 import CommonDomain
 
+@MainActor
 struct GetAmountForWalletCategoryTests {
     private let sut: GetMoneyForWalletCategoryUseCase
     private let repository: WalletsRepositoryMock
@@ -18,7 +19,7 @@ struct GetAmountForWalletCategoryTests {
         sut = .init(repository: repository)
     }
 
-    @Test func amountIsSummedCorrectly() async throws {
+    @Test @MainActor func amountIsSummedCorrectly() async throws {
         let category = WalletCategory.debt
         let wallets: [Wallet] = [
             .mock(category: category, amount: Money(amount: 100)),

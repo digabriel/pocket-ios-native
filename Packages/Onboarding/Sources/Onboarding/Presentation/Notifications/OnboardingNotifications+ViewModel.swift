@@ -10,7 +10,7 @@ import SwiftUI
 import Notifications
 
 extension OnboardingNotificationsView {
-    @Observable final class ViewModel {
+    @MainActor @Observable final class ViewModel {
         private let dependency: Dependency
 
         // Outputs

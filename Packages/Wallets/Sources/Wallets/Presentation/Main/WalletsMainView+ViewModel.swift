@@ -8,7 +8,7 @@
 import Foundation
 
 extension WalletsMainView {
-    @Observable final class ViewModel {
+    @MainActor @Observable final class ViewModel {
         let childrenViewModels: Children
 
         init(dependency: Dependency) {

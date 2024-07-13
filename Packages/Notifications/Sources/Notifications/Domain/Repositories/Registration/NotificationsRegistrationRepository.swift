@@ -7,15 +7,15 @@
 
 import UserNotifications
 
-protocol NotificationsRegistrationStatusFetching {
+protocol NotificationsRegistrationStatusFetching: Sendable {
     func currentStatus() async -> NotificationRegistrationStatus
 }
 
-protocol NotificationsRegistrationStatusCreating {
+protocol NotificationsRegistrationStatusCreating: Sendable {
     func registerForNotifications() async throws -> Bool
 }
 
-extension UNUserNotificationCenter: NotificationsRegistrationStatusCreating, NotificationsRegistrationStatusFetching {
+extension UNUserNotificationCenter: NotificationsRegistrationStatusCreating, NotificationsRegistrationStatusFetching, @unchecked Sendable {
     func registerForNotifications() async throws -> Bool {
         try await withCheckedThrowingContinuation { continuation in
             requestAuthorization(options: [.badge, .alert, .sound]) { result, error in

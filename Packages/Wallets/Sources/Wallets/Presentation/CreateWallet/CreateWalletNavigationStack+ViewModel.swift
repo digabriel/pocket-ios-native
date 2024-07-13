@@ -8,7 +8,7 @@
 import Foundation
 
 extension CreateWalletNavigationStack {
-    @Observable final class ViewModel {
+    @MainActor @Observable final class ViewModel {
         private let dependency: Dependency
 
         private(set) var sections: [Section] = []
@@ -35,7 +35,7 @@ extension CreateWalletNavigationStack {
         let title: String
     }
 
-    struct Dependency {
+    struct Dependency: Sendable {
         let getWalletCategoriesUseCase: any GetWalletCategoriesProtocol
     }
 }

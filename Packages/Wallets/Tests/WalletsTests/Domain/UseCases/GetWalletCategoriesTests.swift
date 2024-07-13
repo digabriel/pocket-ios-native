@@ -8,6 +8,7 @@
 import Testing
 @testable import Wallets
 
+@MainActor
 struct GetWalletCategoriesTests {
     @Test func callsRepository() async throws {
         let repository = WalletCategoriesRepositorySpy()
@@ -15,6 +16,6 @@ struct GetWalletCategoriesTests {
         
         _ = try await sut.execute(input: ())
 
-        #expect(repository.getAllCount == 1)
+        #expect(await repository.getAllCount == 1)
     }
 }

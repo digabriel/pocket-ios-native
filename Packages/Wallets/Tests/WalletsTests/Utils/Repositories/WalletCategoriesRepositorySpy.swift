@@ -7,6 +7,7 @@
 
 @testable import Wallets
 
+@MainActor
 final class WalletCategoriesRepositorySpy: WalletCategoriesRepositoryProtocol {
     private(set) var getAllCount = 0
     private(set) var createAllCount = 0

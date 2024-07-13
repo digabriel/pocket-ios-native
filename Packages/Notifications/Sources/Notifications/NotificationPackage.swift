@@ -10,7 +10,7 @@ import SwiftData
 import Logging
 import CommonDomain
 
-public struct NotificationPackage: PackageConfigurator, Sendable {
+public struct NotificationPackage: PackageConfigurator {
     private let logger = Logger(label: "net.dimasgabriel.Pocket.Notifications")
     private let modelContext: ModelContext
 

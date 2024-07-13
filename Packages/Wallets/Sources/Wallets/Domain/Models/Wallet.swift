@@ -8,7 +8,7 @@
 import Foundation
 import CommonDomain
 
-public struct Wallet {
+public struct Wallet: Sendable {
     public let category: WalletCategory
     public let amount: Money
 }

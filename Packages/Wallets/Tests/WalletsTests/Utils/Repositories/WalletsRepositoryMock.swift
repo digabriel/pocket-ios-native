@@ -7,6 +7,7 @@
 
 @testable import Wallets
 
+@MainActor
 final class WalletsRepositoryMock: WalletsRepositoryProtocol {
     var getAllByCategoryResult: [Wallet]?
 

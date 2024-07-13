@@ -7,7 +7,7 @@
 
 import Foundation
 
-public struct Dimensions {
+public struct Dimensions: Sendable {
     public static let shared = Dimensions()
 
     public let one: CGFloat = 3

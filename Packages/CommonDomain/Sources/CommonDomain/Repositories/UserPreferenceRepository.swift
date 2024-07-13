@@ -7,12 +7,12 @@
 
 import Foundation
 
-public protocol UserPreferenceRepository {
+public protocol UserPreferenceRepository: Sendable {
     func set(preference: UserPreference)
     func preference(for key: UserPreference.Key) -> UserPreference
 }
 
-public final class UserPreferenceRepositoryImpl: UserPreferenceRepository {
+public final class UserPreferenceRepositoryImpl: UserPreferenceRepository, @unchecked Sendable {
     let userDefaults: UserDefaults
 
     public init(userDefaults: UserDefaults = .standard) {

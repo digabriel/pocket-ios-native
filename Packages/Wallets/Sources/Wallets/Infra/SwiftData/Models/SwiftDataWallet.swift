@@ -10,8 +10,8 @@ import Foundation
 import CommonDomain
 
 @Model public final class SwiftDataWallet {
-    public let category: SwiftDataWalletCategory
-    public let amount: Decimal
+    public private(set) var category: SwiftDataWalletCategory
+    public private(set) var amount: Decimal
 
     init(category: SwiftDataWalletCategory, amount: Decimal) {
         self.category = category

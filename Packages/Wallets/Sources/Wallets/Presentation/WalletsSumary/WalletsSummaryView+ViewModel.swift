@@ -9,7 +9,7 @@ import Foundation
 import CommonDomain
 
 extension WalletsSummaryView {
-    @Observable final class ViewModel {
+    @MainActor @Observable final class ViewModel {
         private(set) var items: [Model] = []
         private let dependency: Dependency
 

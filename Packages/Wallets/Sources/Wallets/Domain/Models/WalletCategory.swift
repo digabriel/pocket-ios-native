@@ -5,7 +5,7 @@
 //  Created by Dimas Gabriel on 7/4/24.
 //
 
-public enum WalletCategory: Int, CaseIterable {
+public enum WalletCategory: Int, CaseIterable, Sendable {
     case spending = 0
     case savings = 1
     case debt = 2

@@ -9,7 +9,7 @@ import Combine
 import SwiftData
 
 public extension OnboardingMainView {
-    final class ViewModel: ObservableObject {
+    @MainActor final class ViewModel: ObservableObject {
         @Published var navigationPath: [OnboardingNavigationPath] = [.landing]
         let modelContext: ModelContext
         let dependency: Dependency

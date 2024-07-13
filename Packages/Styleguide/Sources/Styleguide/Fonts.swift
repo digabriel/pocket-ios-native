@@ -12,7 +12,7 @@ public extension Font {
     static let text = Text()
     static let button = Button()
 
-    struct Title {
+    struct Title: Sendable {
         public var small: Font { Font.system(size: 16, weight: .medium) }
         public var smallRounded: Font { Font.system(size: 18, weight: .medium, design: .rounded) }
         public var regular: Font { Font.system(size: 24, weight: .bold) }
@@ -21,14 +21,14 @@ public extension Font {
         public var largerRounded: Font { Font.system(size: 48, weight: .semibold, design: .rounded) }
     }
     
-    struct Text {
+    struct Text: Sendable {
         public var larger: Font { Font.system(size: 30) }
         public var regular: Font { Font.system(size: 18) }
         public var small: Font { Font.system(size: 16) }
         public var smaller: Font { Font.system(size: 14) }
     }
 
-    struct Button {
+    struct Button: Sendable {
         public var regular: Font { Font.system(size: 20, weight: .medium) }
 
     }

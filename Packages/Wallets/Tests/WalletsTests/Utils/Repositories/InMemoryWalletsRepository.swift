@@ -7,6 +7,7 @@
 
 @testable import Wallets
 
+@MainActor
 final class InMemoryWalletsRepository: WalletsRepositoryProtocol {
     private var wallets: [Wallet] = []
 

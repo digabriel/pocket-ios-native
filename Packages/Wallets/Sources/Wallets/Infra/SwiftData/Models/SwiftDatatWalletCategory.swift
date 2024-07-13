@@ -8,7 +8,7 @@
 import SwiftData
 
 @Model public class SwiftDataWalletCategory {
-    let identifier: Int
+    private(set) var identifier: Int
 
     init(identifier: Int) {
         self.identifier = identifier

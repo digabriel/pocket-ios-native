@@ -7,14 +7,14 @@
 
 import Foundation
 
-public struct Money: Equatable {
+public struct Money: Equatable, Sendable {
     public let amount: Decimal
 
     public init(amount: Decimal) {
         self.amount = amount
     }
 
-    public static var zero: Money = Money(amount: 0)
+    public static let zero: Money = Money(amount: 0)
 
     public static func +(lhs: Self, rhs: Self) -> Money {
         return .init(amount: lhs.amount + rhs.amount)

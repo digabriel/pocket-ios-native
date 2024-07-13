@@ -13,14 +13,14 @@ public extension Color {
     static let regular = Regular()
     static let wallet = Wallet()
 
-    struct Background {
+    struct Background: Sendable {
         public let pastel = Color(ColorResource.backgroundPastel)
         public let lightGray = Color(ColorResource.backgroundLightGray)
         public let darkPink = Color(ColorResource.backgroundDarkPink)
         public let lightPink = Color(ColorResource.backgroundLightPink)
     }
 
-    struct Regular {
+    struct Regular: Sendable {
         public let orange = Color(ColorResource.orange)
         public let black = Color(ColorResource.black)
         public let white = Color(ColorResource.white)
@@ -29,7 +29,7 @@ public extension Color {
         public let dark = Color(ColorResource.dark)
     }
 
-    struct Wallet {
+    struct Wallet: Sendable {
         public let accent = Color(ColorResource.walletsAccent)
     }
 }

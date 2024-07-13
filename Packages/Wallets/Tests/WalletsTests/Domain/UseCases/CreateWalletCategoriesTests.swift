@@ -8,6 +8,7 @@
 import Testing
 @testable import Wallets
 
+@MainActor
 struct CreateWalletCategoriesTests {
     @Test func shouldCallRepositoryForEachCategory() async throws {
         let repository = WalletCategoriesRepositorySpy()

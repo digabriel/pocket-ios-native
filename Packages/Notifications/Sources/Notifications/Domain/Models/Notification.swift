@@ -9,7 +9,7 @@ import SwiftData
 
 @Model
 public final class NotificationBucket {
-    @Attribute(.unique) public let key: Int
+    public private(set) var key: Int
     public var isEnabled: Bool
 
     public init(key: Key, isEnabled: Bool) {
