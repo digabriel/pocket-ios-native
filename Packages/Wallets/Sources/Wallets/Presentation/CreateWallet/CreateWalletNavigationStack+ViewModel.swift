@@ -13,6 +13,7 @@ extension CreateWalletNavigationStack {
 
         private(set) var sections: [Section] = []
         var currentSectionIndex = 0
+        var activeSection: Section { sections[currentSectionIndex] }
 
         init(dependency: Dependency) {
             self.dependency = dependency
