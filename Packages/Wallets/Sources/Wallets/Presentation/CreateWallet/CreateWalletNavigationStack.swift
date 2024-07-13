@@ -21,8 +21,14 @@ struct CreateWalletNavigationStack: View {
             VStack(spacing: Dimensions.shared.five) {
                 headerView
                 pageSelectorView
+                Group {
+                    tipTextView
+                }
+                .padding(.horizontal, Dimensions.shared.eight)
+
             }
             .task { await viewModel.refresh() }
+            .transition(.opacity)
         }
     }
 
@@ -61,6 +67,19 @@ struct CreateWalletNavigationStack: View {
                 .frame(height: 8)
         }
 
+    }
+
+    @ViewBuilder private var tipTextView: some View {
+        if let tipText = viewModel.activeSection?.tipText {
+            ZStack {
+                Text(tipText)
+                    .font(Font.text.small)
+                    .frame(maxWidth: .infinity, alignment: .leading)
+                    .padding(Dimensions.shared.eight)
+            }
+            .background(Color.background.lightGray)
+            .cornerRadius(12)
+        }
     }
 }
 
