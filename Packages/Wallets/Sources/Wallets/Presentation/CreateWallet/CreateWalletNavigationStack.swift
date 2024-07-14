@@ -66,7 +66,7 @@ struct CreateWalletNavigationStack: View {
             )
             .textCase(.uppercase)
             .foregroundStyle(Color.regular.gray)
-            .font(Font.text.smaller)
+            .font(Font.text.tiny)
             .kerning(0.8)
             .tint(Color.wallet.accent)
 
@@ -113,12 +113,13 @@ struct CreateWalletNavigationStack: View {
                     .textCase(.uppercase)
                     .font(Font.title.smallBold)
                     .foregroundStyle(Color.regular.black)
-                    .kerning(0.7)
+                    .kerning(1.2)
 
                 Text(item.description)
                     .font(Font.text.small)
                     .foregroundStyle(Color.regular.softGray)
                     .frame(maxWidth: .infinity, alignment: .leading)
+                    .kerning(0.7)
             }
         }
         .padding(.vertical, Dimensions.shared.eight)
