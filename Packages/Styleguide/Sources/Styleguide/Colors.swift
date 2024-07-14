@@ -27,6 +27,18 @@ public extension Color {
         public let gray = Color(ColorResource.gray)
         public let yellow = Color(ColorResource.yellow)
         public let dark = Color(ColorResource.dark)
+        public let lightBlue = Color(ColorResource.lightBlue)
+        public let pastelRed = Color(ColorResource.pastelRed)
+        public let purple = Color(ColorResource.purple)
+        public let lightGray = Color(ColorResource.lightGray)
+        public let blueGreen = Color(ColorResource.blueGreen)
+        public let pink = Color(ColorResource.pink)
+        public let green = Color(ColorResource.green)
+        public let darkGreen = Color(ColorResource.darkGreen)
+        public let blue = Color(ColorResource.blue)
+        public let red = Color(ColorResource.red)
+        public let darkGray = Color(ColorResource.darkGray)
+        public let softGray = Color(ColorResource.softGray)
     }
 
     struct Wallet: Sendable {

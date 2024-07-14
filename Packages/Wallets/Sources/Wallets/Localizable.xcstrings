@@ -1,28 +1,88 @@
 {
   "sourceLanguage" : "en",
   "strings" : {
-    "    Debt wallets reduces your net worth. Expenses added from debt wallet deminishes the remaining balance of the wallet." : {
+    "Car Loan" : {
 
     },
-    "    People who set their savings goal save faster and up to $550 more a year than people who don’t." : {
+    "Cash" : {
 
     },
     "Create Wallet" : {
 
     },
+    "Credit" : {
+
+    },
+    "Custom" : {
+
+    },
     "Debt" : {
+
+    },
+    "Debt wallets reduces your net worth. Expenses added from debt wallet deminishes the remaining balance of the wallet." : {
+
+    },
+    "For money and transactions you make with cash." : {
+
+    },
+    "For you credit card or other accounts with credit limit." : {
+
+    },
+    "House" : {
+
+    },
+    "Loan" : {
+
+    },
+    "Money that you owe someone else." : {
 
     },
     "New Wallet" : {
 
     },
+    "People who set their savings goal save faster and up to $550 more a year than people who don’t." : {
+
+    },
+    "Personal Debt" : {
+
+    },
+    "Rainy Day Fund" : {
+
+    },
+    "Reserved money for special need." : {
+
+    },
+    "Save up to buy a house or apartment." : {
+
+    },
     "Savings" : {
+
+    },
+    "Savings for your trip or your vacation." : {
+
+    },
+    "Specify yourself." : {
 
     },
     "Spending" : {
 
     },
+    "The wallet for your daily spendings - i.e. your salary account." : {
+
+    },
+    "Track your payments for you car loan." : {
+
+    },
+    "Trip" : {
+
+    },
     "WALLETS" : {
+
+    },
+    "Your bank load, mortage or short term debt." : {
+
+    },
+    "Your default savings wallets." : {
 
     }
   },
