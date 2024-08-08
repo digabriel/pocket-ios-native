@@ -18,10 +18,14 @@ struct CreateWalletViewModelTests {
         return CreateWalletNavigationStack.ViewModel(dependency: dependency)
     }
 
-    @Test func shouldOutputWalletCategoriesAsSections() async throws {
+    private func createDefaultWallets() async throws {
         try await walletCategoriesRepository.create(category: .savings)
         try await walletCategoriesRepository.create(category: .debt)
-        
+    }
+
+    @Test func shouldOutputWalletCategoriesAsSections() async throws {
+        try await createDefaultWallets()
+
         let sut = makeSut()
         await sut.refresh()
 
@@ -31,7 +35,7 @@ struct CreateWalletViewModelTests {
     }
 
     @Test func currentSectionIndex_onInit() async throws {
-        try await walletCategoriesRepository.create(category: .savings)
+        try await createDefaultWallets()
 
         let sut = makeSut()
         await sut.refresh()
@@ -40,13 +44,56 @@ struct CreateWalletViewModelTests {
     }
 
     @Test func currentSectionShouldMapCurrentSectionIndex() async throws {
-        try await walletCategoriesRepository.create(category: .savings)
-        try await walletCategoriesRepository.create(category: .debt)
+        try await createDefaultWallets()
 
         let sut = makeSut()
         await sut.refresh()
         sut.currentSectionIndex = 1
 
         #expect(sut.activeSection?.title == "Debt")
+    }
+
+    @Test func selectPreviousSection_happyPath() async throws {
+        try await createDefaultWallets()
+
+        let sut = makeSut()
+        await sut.refresh()
+        sut.currentSectionIndex = 1
+        sut.selectPreviousSection()
+
+        #expect(sut.currentSectionIndex == 0)
+    }
+
+    @Test func selectPreviousSection_noPreviousSection() async throws {
+        try await createDefaultWallets()
+
+        let sut = makeSut()
+        await sut.refresh()
+        sut.currentSectionIndex = 0
+        sut.selectPreviousSection()
+
+        #expect(sut.currentSectionIndex == 0)
+    }
+
+    @Test func selectNextSection_happyPath() async throws {
+        try await createDefaultWallets()
+
+        let sut = makeSut()
+        await sut.refresh()
+        sut.currentSectionIndex = 0
+        sut.selectNextSection()
+
+        #expect(sut.currentSectionIndex == 1)
+    }
+
+    @Test func selectNextSection_noNextSection() async throws {
+        try await createDefaultWallets()
+
+        let sut = makeSut()
+        await sut.refresh()
+        sut.currentSectionIndex = 1
+        sut.selectNextSection()
+
+        #expect(sut.currentSectionIndex == 1)
     }
 }
