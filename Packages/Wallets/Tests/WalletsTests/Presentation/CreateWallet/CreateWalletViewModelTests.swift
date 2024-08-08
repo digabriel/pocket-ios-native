@@ -30,9 +30,10 @@ struct CreateWalletViewModelTests {
         #expect(sut.sections[1].title == "Debt")
     }
 
-    @Test func currentSectionIndex_onInit() async {
-        let sut = makeSut()
+    @Test func currentSectionIndex_onInit() async throws {
+        try await walletCategoriesRepository.create(category: .savings)
 
+        let sut = makeSut()
         await sut.refresh()
 
         #expect(sut.currentSectionIndex == 0)
@@ -46,6 +47,6 @@ struct CreateWalletViewModelTests {
         await sut.refresh()
         sut.currentSectionIndex = 1
 
-        #expect(sut.activeSection.title == "Debt")
+        #expect(sut.activeSection?.title == "Debt")
     }
 }

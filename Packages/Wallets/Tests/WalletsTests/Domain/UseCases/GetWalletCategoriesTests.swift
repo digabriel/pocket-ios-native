@@ -16,6 +16,6 @@ struct GetWalletCategoriesTests {
         
         _ = try await sut.execute(input: ())
 
-        #expect(await repository.getAllCount == 1)
+        #expect(repository.getAllCount == 1)
     }
 }
