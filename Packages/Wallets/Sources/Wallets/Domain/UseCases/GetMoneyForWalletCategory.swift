@@ -19,6 +19,8 @@ public final class GetMoneyForWalletCategoryUseCase: GetMoneyForWalletCategoryPr
 
     public func execute(input: Input) async throws -> Output {
         let wallets = try await repository.getAllByCategory(input)
-        return wallets.reduce(Money.zero, { $0 + $1.amount })
+        guard wallets.count > 0 else { return Money.zero(currency: .USD) }
+        let currency = wallets[0].amount.currency
+        return try wallets.reduce(Money.zero(currency: currency), { try $0 + $1.amount })
     }
 }

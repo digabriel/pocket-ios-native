@@ -12,10 +12,12 @@ import CommonDomain
 @Model public final class SwiftDataWallet {
     public private(set) var category: SwiftDataWalletCategory
     public private(set) var amount: Decimal
+    public private(set) var currencyCode: String
 
-    init(category: SwiftDataWalletCategory, amount: Decimal) {
+    init(category: SwiftDataWalletCategory, amount: Decimal, currencyCode: String) {
         self.category = category
         self.amount = amount
+        self.currencyCode = currencyCode
     }
 }
 
@@ -25,13 +27,16 @@ extension SwiftDataWallet {
             throw WalletCategoryError.invalidRawValue
         }
 
-        return .init(category: walletCategory, amount: Money(amount: amount))
+        let currency = try Currency.from(code: currencyCode)
+
+        return .init(category: walletCategory, amount: Money(amount: amount, currency: currency))
     }
 
     convenience init(domainModel: Wallet) {
         self.init(
             category: .init(identifier: domainModel.category.rawValue),
-            amount: domainModel.amount.amount
+            amount: domainModel.amount.amount,
+            currencyCode: domainModel.amount.currency.code
         )
     }
 }

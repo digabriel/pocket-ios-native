@@ -29,9 +29,9 @@ struct WalletsSummaryViewModelTests {
     @Test func shouldBuildItemsOutput() async throws {
         try await walletCategoriesRepository.create(category: .debt)
         try await walletCategoriesRepository.create(category: .savings)
-        try await walletsRepository.create(.mock(category: .debt, amount: Money(amount: 100)))
-        try await walletsRepository.create(.mock(category: .debt, amount: Money(amount: 200)))
-        try await walletsRepository.create(.mock(category: .savings, amount: Money(amount: 50)))
+        try await walletsRepository.create(.mock(category: .debt, amount: Money(amount: 100, currency: .USD)))
+        try await walletsRepository.create(.mock(category: .debt, amount: Money(amount: 200, currency: .USD)))
+        try await walletsRepository.create(.mock(category: .savings, amount: Money(amount: 50, currency: .USD)))
 
         let sut = makeSut()
         await sut.refresh()
@@ -41,8 +41,8 @@ struct WalletsSummaryViewModelTests {
         #expect(sut.items.count == 2)
         #expect(firstItem.category == .savings)
         #expect(secondItem.category == .debt)
-        #expect(firstItem.amount == Money(amount: 50))
-        #expect(secondItem.amount == Money(amount: 300))
+        #expect(firstItem.amount == Money(amount: 50, currency: .USD))
+        #expect(secondItem.amount == Money(amount: 300, currency: .USD))
 
     }
 }

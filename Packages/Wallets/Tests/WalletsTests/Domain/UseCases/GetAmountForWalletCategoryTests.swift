@@ -22,14 +22,14 @@ struct GetAmountForWalletCategoryTests {
     @Test @MainActor func amountIsSummedCorrectly() async throws {
         let category = WalletCategory.debt
         let wallets: [Wallet] = [
-            .mock(category: category, amount: Money(amount: 100)),
-            .mock(category: category, amount: Money(amount: 50)),
-            .mock(category: WalletCategory.savings, amount: Money(amount: 100))
+            .mock(category: category, amount: Money(amount: 100, currency: .USD)),
+            .mock(category: category, amount: Money(amount: 50, currency: .USD)),
+            .mock(category: WalletCategory.savings, amount: Money(amount: 100, currency: .USD))
         ]
         repository.getAllByCategoryResult = wallets
 
         let amount = try await sut.execute(input: category)
 
-        #expect(amount == Money(amount: 150))
+        #expect(amount == Money(amount: 150, currency: .USD))
     }
 }

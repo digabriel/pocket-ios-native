@@ -11,14 +11,14 @@ import SwiftData
 import CommonDomain
 
 extension Wallet {
-    static func mock(category: WalletCategory, amount: Money = .zero) -> Wallet {
+    static func mock(category: WalletCategory, amount: Money = .zero(currency: .USD)) -> Wallet {
         return self.init(category: category, amount: amount)
     }
 }
 
 extension SwiftDataWallet {
-    static func mock(category: SwiftDataWalletCategory, amount: Decimal = 0) -> SwiftDataWallet {
-        .init(category: category, amount: amount)
+    static func mock(category: SwiftDataWalletCategory, amount: Decimal = 0, currencyCode: String = "USD") -> SwiftDataWallet {
+        .init(category: category, amount: amount, currencyCode: currencyCode)
     }
 
     static func mock(category: SwiftDataWalletCategory, amount: Decimal = 0, insertedIn context: ModelContext) throws -> SwiftDataWallet {

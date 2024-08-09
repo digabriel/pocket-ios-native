@@ -10,7 +10,7 @@ import CommonDomain
 final class GetMoneyForWalletCategoryPreview: GetMoneyForWalletCategoryProtocol {
     private let money: Money
 
-    init(money: Money = Money(amount: 200000)) {
+    init(money: Money = Money(amount: 200000, currency: .BRL)) {
         self.money = money
     }
 
