@@ -8,7 +8,7 @@
 import Foundation
 import CommonDomain
 
-struct CreateWalletModel {
+struct CreateWalletModel: Equatable, Hashable {
     let name: String
     let category: WalletCategory
     let initialBalance: Money

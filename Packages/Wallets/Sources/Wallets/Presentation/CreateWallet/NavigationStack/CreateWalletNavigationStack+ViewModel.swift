@@ -7,6 +7,7 @@
 
 import Foundation
 import SwiftUI
+import CommonDomain
 
 extension CreateWalletNavigationStack {
     @MainActor @Observable final class ViewModel {
@@ -26,7 +27,8 @@ extension CreateWalletNavigationStack {
         func refresh() async {
             do {
                 let walletCategories = try await dependency.getWalletCategoriesUseCase.execute(input: ())
-                sections = walletCategories.map { .init(title: $0.name, tipText: $0.tipText, items: $0.items) }
+                sections = walletCategories
+                    .map { .init(title: $0.name, tipText: $0.tipText, items: $0.items, walletCategory: $0) }
                 activeSection = sections[currentSectionIndex]
             } catch {
                 sections = []
@@ -44,6 +46,16 @@ extension CreateWalletNavigationStack {
                 currentSectionIndex += 1
             }
         }
+
+        func selectItem(item: SectionItem) -> CreateWalletModel? {
+            guard let activeSection else { return nil }
+
+            return CreateWalletModel(
+                name: item.title,
+                category: activeSection.walletCategory,
+                initialBalance: Money.zero(currency: .USD) // TODO: load default currency from local config
+            )
+        }
     }
 }
 
@@ -52,6 +64,7 @@ extension CreateWalletNavigationStack {
         let title: String
         let tipText: String?
         let items: [SectionItem]
+        let walletCategory: WalletCategory
     }
 
     struct SectionItem: Identifiable {

@@ -10,6 +10,7 @@ import Styleguide
 
 struct CreateWalletNavigationStack: View {
     @State private var viewModel: ViewModel
+    @State private var navigationPath = [Screen]()
     @Environment(\.dismiss) var dismiss
 
     init(viewModel: ViewModel) {
@@ -17,7 +18,7 @@ struct CreateWalletNavigationStack: View {
     }
 
     var body: some View {
-        NavigationStack {
+        NavigationStack(path: $navigationPath) {
             VStack(spacing: Dimensions.shared.five) {
                 headerView
                 pageSelectorView
@@ -35,27 +36,20 @@ struct CreateWalletNavigationStack: View {
                 case .left: viewModel.selectNextSection()
                 }
             }
+            .navigationDestination(for: Screen.self) { screen in
+                switch screen {
+                case .balance(let model):
+                    CreateWalletBalanceView(viewModel: .init(model: model))
+                }
+            }
         }
     }
 
     private var headerView: some View {
-        HStack {
-            Button { dismiss() } label: {
-                Image(systemName: "xmark")
-            }
-            .font(Font.text.regular)
-
-            Spacer()
-
-            Text("Create Wallet")
-                .textCase(.uppercase)
-
-            Spacer()
-        }
-        .foregroundStyle(Color.regular.gray)
-        .font(Font.text.smaller)
-        .kerning(1)
-        .padding(Dimensions.shared.eight)
+        CreateWalletNavigationHeaderView(
+            title: "Create Wallet",
+            leftButtonType: .dismiss
+        )
     }
 
     private var pageSelectorView: some View {
@@ -93,6 +87,10 @@ struct CreateWalletNavigationStack: View {
         ForEach(viewModel.activeSection?.items ?? []) { item in
             VStack {
                 itemView(item: item)
+                    .onTapGesture {
+                        guard let model = viewModel.selectItem(item: item) else { return }
+                        navigationPath.append(.balance(model: model))
+                    }
                 Divider()
             }
         }
@@ -123,6 +121,12 @@ struct CreateWalletNavigationStack: View {
             }
         }
         .padding(.vertical, Dimensions.shared.eight)
+    }
+}
+
+extension CreateWalletNavigationStack {
+    enum Screen: Hashable {
+        case balance(model: CreateWalletModel)
     }
 }
 

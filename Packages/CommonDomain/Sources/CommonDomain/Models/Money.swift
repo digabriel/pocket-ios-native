@@ -7,7 +7,7 @@
 
 import Foundation
 
-public struct Money: Equatable, Sendable {
+public struct Money: Equatable, Sendable, Hashable {
     public let amount: Decimal
     public let currency: Currency
 
