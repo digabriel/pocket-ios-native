@@ -18,5 +18,7 @@ public struct Dimensions: Sendable {
     public let eight: CGFloat = 20
     public let ten: CGFloat = 24
     public let fourteen: CGFloat = 32
+    public let sixteen: CGFloat = 40
     public let seventeen: CGFloat = 44
+    public let nineteen: CGFloat = 48
 }

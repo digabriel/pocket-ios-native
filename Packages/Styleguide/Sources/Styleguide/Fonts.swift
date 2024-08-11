@@ -17,6 +17,7 @@ public extension Font {
         public var smallBold: Font { Font.system(size: 15, weight: .bold) }
         public var smallRounded: Font { Font.system(size: 18, weight: .medium, design: .rounded) }
         public var regular: Font { Font.system(size: 24, weight: .bold) }
+        public var regularRounded2: Font { Font.system(size: 30, weight: .semibold, design: .rounded) }
         public var large: Font { Font.system(size: 36, weight: .bold) }
         public var largeRounded: Font { Font.system(size: 36, weight: .semibold, design: .rounded) }
         public var largerRounded: Font { Font.system(size: 48, weight: .semibold, design: .rounded) }
@@ -36,4 +37,16 @@ public extension Font {
     }
 }
 
+public extension Font.Title {
+    public var largeRoundedUIKit: UIFont {
+        let systemFont = UIFont.systemFont(ofSize: 36, weight: .semibold)
+        let font: UIFont
 
+        if let descriptor = systemFont.fontDescriptor.withDesign(.rounded) {
+            font = UIFont(descriptor: descriptor, size: 36)
+        } else {
+            font = systemFont
+        }
+        return font
+    }
+}

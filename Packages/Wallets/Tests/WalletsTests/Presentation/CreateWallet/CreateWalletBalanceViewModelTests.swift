@@ -14,12 +14,39 @@ struct CreateWalletBalanceViewModelTests {
         return .init(model: model)
     }
 
-    @Test func titleShouldMatchModelName() {
+    @Test func tit5leShouldMatchModelName() {
         let expectedTitle = "My Beautiful Title"
         let model = CreateWalletModel.mock(name: expectedTitle)
 
         let sut = makeSut(model: model)
 
         #expect(sut.title == expectedTitle)
+    }
+
+    @Test func inputPlaceholderTextForDebtCategory() {
+        let expectedText = "How much was the debt from the start?"
+        let model = CreateWalletModel.mock(category: .debt)
+
+        let sut = makeSut(model: model)
+
+        #expect(sut.inputPlaceholderText == expectedText)
+    }
+
+    @Test func inputPlaceholderTextForSpendingCategory() {
+        let expectedText = "Current balance"
+        let model = CreateWalletModel.mock(category: .spending)
+
+        let sut = makeSut(model: model)
+
+        #expect(sut.inputPlaceholderText == expectedText)
+    }
+
+    @Test func inputPlaceholderTextForSavingsCategory() {
+        let expectedText = "Current balance"
+        let model = CreateWalletModel.mock(category: .savings)
+
+        let sut = makeSut(model: model)
+
+        #expect(sut.inputPlaceholderText == expectedText)
     }
 }
