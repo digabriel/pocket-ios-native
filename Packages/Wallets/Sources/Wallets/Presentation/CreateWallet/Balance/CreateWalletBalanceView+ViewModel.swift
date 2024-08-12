@@ -13,16 +13,21 @@ extension CreateWalletBalanceView {
         let title: String
         let inputPlaceholderText: String
         let descriptionText: String
+        let currency: Currency
         var inputValue: Decimal
-        var currency: Currency { model.initialBalance.currency }
 
-        private var model: CreateWalletModel
+        private let model: CreateWalletModel
+
+        var updatedModel: CreateWalletModel {
+            model.updatingInitialBalance(newAmount: inputValue)
+        }
 
         init(model: CreateWalletModel) {
             self.model = model
             self.title = model.name
             self.inputPlaceholderText = model.category.inputPlaceholderText
             self.descriptionText = model.category.descriptionText
+            self.currency = model.initialBalance.currency
             self.inputValue = model.initialBalance.amount
         }
     }
@@ -52,7 +57,7 @@ private extension WalletCategory {
     }
 }
 
-extension CreateWalletModel {
+private extension CreateWalletModel {
     func updatingInitialBalance(newAmount: Decimal) -> CreateWalletModel {
         let money = Money(amount: newAmount, currency: self.initialBalance.currency)
         return .init(name: self.name, category: self.category, initialBalance: money)

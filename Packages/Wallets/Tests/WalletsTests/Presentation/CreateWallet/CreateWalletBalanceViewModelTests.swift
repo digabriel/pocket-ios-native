@@ -6,6 +6,7 @@
 //
 
 import Testing
+import CommonDomain
 @testable import Wallets
 
 @MainActor
@@ -75,5 +76,15 @@ struct CreateWalletBalanceViewModelTests {
         let sut = makeSut(model: model)
 
         #expect(sut.descriptionText == expectedText)
+    }
+
+    @Test func updatedModelShouldBeUpdatedWithCurrentInputValue() {
+        let model = CreateWalletModel.mock(category: .spending, initialBalance: .zero(currency: .USD))
+
+        let sut = makeSut(model: model)
+        #expect(sut.inputValue == .zero)
+        sut.inputValue = 25.5
+
+        #expect(sut.updatedModel.initialBalance == Money(amount: 25.5, currency: .USD))
     }
 }
