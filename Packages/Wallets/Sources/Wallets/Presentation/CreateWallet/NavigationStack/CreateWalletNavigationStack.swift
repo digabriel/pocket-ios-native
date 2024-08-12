@@ -39,7 +39,9 @@ struct CreateWalletNavigationStack: View {
             .navigationDestination(for: Screen.self) { screen in
                 switch screen {
                 case .balance(let model):
-                    CreateWalletBalanceView(viewModel: .init(model: model))
+                    CreateWalletBalanceView(viewModel: .init(model: model), navigationPath: $navigationPath)
+                case .overview(let model):
+                    CreateWalletOverviewView()
                 }
             }
         }
@@ -127,6 +129,7 @@ struct CreateWalletNavigationStack: View {
 extension CreateWalletNavigationStack {
     enum Screen: Hashable {
         case balance(model: CreateWalletModel)
+        case overview(model: CreateWalletModel)
     }
 }
 
