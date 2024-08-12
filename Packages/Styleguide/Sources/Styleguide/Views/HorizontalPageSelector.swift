@@ -62,7 +62,7 @@ public struct HorizontalPageSelector: View {
 }
 
 #Preview {
-    StatefulPreviewWrapper(0) { 
+    StatefulPreviewWrapper(0) {
         HorizontalPageSelector(items: ["First", "Second", "Third"], currentIndex: $0)
     }
 }

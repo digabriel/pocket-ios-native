@@ -6,5 +6,5 @@
 //
 
 final class SetOnboardingDoneUseCasePreview: SetOnboardingDoneUseCase {
-    func execute(input: ()) async throws -> () {}
+    func execute(input: ()) async throws {}
 }

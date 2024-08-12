@@ -53,4 +53,3 @@ struct NotificationButtonTogglerViewModelTests {
         #expect(bucket?.isEnabled == true)
     }
 }
-

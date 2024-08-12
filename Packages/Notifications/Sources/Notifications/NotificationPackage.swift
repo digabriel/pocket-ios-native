@@ -18,7 +18,7 @@ public struct NotificationPackage: PackageConfigurator {
         modelContext = ModelContext(modelContainer)
         modelContext.autosaveEnabled = true
     }
-    
+
     public func setupData() async {
         await buildNotificationsBucket()
     }

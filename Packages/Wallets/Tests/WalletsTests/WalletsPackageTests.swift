@@ -10,11 +10,9 @@ struct WalletsPackageTests {
 
         let sut = SwiftUIWalletsPackage(swiftDataContainer: container)
         await sut.setupData()
-        
+
         let fetchAllCategories = FetchDescriptor<SwiftDataWalletCategory>()
         let allCategories = try context.fetch(fetchAllCategories).map { try $0.toDomain() }
         #expect(allCategories.sorted() == WalletCategory.allCases.sorted())
     }
 }
-
-

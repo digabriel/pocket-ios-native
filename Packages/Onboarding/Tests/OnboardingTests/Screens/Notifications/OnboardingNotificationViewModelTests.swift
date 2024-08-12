@@ -12,7 +12,7 @@ import Notifications
 
 final class OnboardingNotificationRegistrationViewModelTests {
     typealias SUT = OnboardingNotificationsView.ViewModel
-    
+
     private var registerForNotificationsUseCaseMock: RegisterForNotificationUseCaseMock!
 
     private func makeSut(
@@ -57,7 +57,6 @@ final class OnboardingNotificationRegistrationViewModelTests {
         #expect(sut.notificationRegistrationError is ErrorMock)
     }
 }
-
 
 private final class RegisterForNotificationUseCaseMock: RegisterForNotificationsUseCaseProtocol {
     enum OutputStatus {

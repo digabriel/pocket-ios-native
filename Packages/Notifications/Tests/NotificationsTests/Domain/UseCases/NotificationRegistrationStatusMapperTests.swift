@@ -15,7 +15,7 @@ struct NotificationRegistrationStatusMapperTests {
         UNAuthorizationStatus.provisional,
         UNAuthorizationStatus.denied,
         UNAuthorizationStatus.authorized,
-        UNAuthorizationStatus.ephemeral,
+        UNAuthorizationStatus.ephemeral
     ])
     func mapFromUNAuthorizationStatus(status: UNAuthorizationStatus) {
         let result = NotificationRegistrationStatusMapper.from(status: status)

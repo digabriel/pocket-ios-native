@@ -16,7 +16,7 @@ final class SetOnboardingDoneUseCaseImpl: SetOnboardingDoneUseCase {
         self.userPreferenceRepository = userPreferenceRepository
     }
 
-    func execute(input: Void) async throws -> Void {
+    func execute(input: Void) async throws {
         let preference = UserPreference(key: .hasDoneOnboarding, value: true)
         userPreferenceRepository.set(preference: preference)
     }

@@ -28,18 +28,17 @@ public struct NotificationBucketTogglerList: View {
         .padding(.all, Dimensions.shared.fourteen)
         .background(Color.regular.white)
         .cornerRadius(16)
-        .shadow(color: Color.regular.black.opacity(0.25), radius: 10, y:4)
+        .shadow(color: Color.regular.black.opacity(0.25), radius: 10, y: 4)
     }
 }
 
 private struct NotificationBucketToggler: View {
     let bucket: NotificationBucket
-    let onChange: (Bool) -> ()
+    let onChange: (Bool) -> Void
 
     @State private var isEnabled: Bool
 
-
-    init(bucket: NotificationBucket, onChange: @escaping (Bool) -> ()) {
+    init(bucket: NotificationBucket, onChange: @escaping (Bool) -> Void) {
         _isEnabled = State(initialValue: bucket.isEnabled)
         self.bucket = bucket
         self.onChange = onChange

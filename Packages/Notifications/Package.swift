@@ -11,12 +11,12 @@ let package = Package(
         // Products define the executables and libraries a package produces, making them visible to other packages.
         .library(
             name: "Notifications",
-            targets: ["Notifications"]),
+            targets: ["Notifications"])
     ],
     dependencies: [
         .package(name: "Styleguide", path: "../Styleguide"),
         .package(name: "CommonDomain", path: "../CommonDomain"),
-        .package(url: "https://github.com/apple/swift-log.git", exact: "1.6.1"),
+        .package(url: "https://github.com/apple/swift-log.git", exact: "1.6.1")
     ],
     targets: [
         // Targets are the basic building blocks of a package, defining a module or a test suite.
@@ -31,6 +31,6 @@ let package = Package(
         .testTarget(
             name: "NotificationsTests",
             dependencies: ["Notifications"]
-        ),
+        )
     ]
 )

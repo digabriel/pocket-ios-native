@@ -24,7 +24,7 @@ public struct Money: Equatable, Sendable, Hashable {
         guard lhs.currency == rhs.currency else {
             throw MoneyError.operationOverDifferentCurrencies
         }
-        
+
         return .init(amount: lhs.amount + rhs.amount, currency: lhs.currency)
     }
 

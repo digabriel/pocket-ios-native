@@ -8,7 +8,7 @@
 import SwiftUI
 
 public struct CircularTitledButton<Icon: View>: View {
-    let action: () -> ()
+    let action: () -> Void
     let icon: () -> Icon
     let title: String
 

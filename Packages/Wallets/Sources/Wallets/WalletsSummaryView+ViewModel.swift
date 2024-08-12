@@ -47,13 +47,5 @@ extension WalletsSummaryView {
     struct Dependency {
         let getWalletCategoriesUseCase: any GetWalletCategoriesProtocol
         let getMoneyForWalletCategoryUseCase: any GetMoneyForWalletCategoryProtocol
-
-        init(
-            getWalletCategoriesUseCase: any GetWalletCategoriesProtocol,
-            getMoneyForWalletCategoryUseCase: any GetMoneyForWalletCategoryProtocol
-        ) {
-            self.getWalletCategoriesUseCase = getWalletCategoriesUseCase
-            self.getMoneyForWalletCategoryUseCase = getMoneyForWalletCategoryUseCase
-        }
     }
 }

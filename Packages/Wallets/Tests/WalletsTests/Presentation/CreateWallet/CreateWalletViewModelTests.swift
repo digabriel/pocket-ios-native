@@ -8,10 +8,10 @@
 import Testing
 @testable import Wallets
 
-@MainActor  
+@MainActor
 struct CreateWalletViewModelTests {
     private let walletCategoriesRepository = InMemoryWalletCategoriesRepository()
-    
+
     private func makeSut() -> CreateWalletNavigationStack.ViewModel {
         let getWalletCategories = GetWalletCategoriesUseCase(repository: walletCategoriesRepository)
         let dependency = CreateWalletNavigationStack.Dependency(getWalletCategoriesUseCase: getWalletCategories)

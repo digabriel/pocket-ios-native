@@ -9,9 +9,9 @@ import SwiftUI
 
 public struct CapsuleButton: View {
     let title: String
-    let action: () -> ()
+    let action: () -> Void
 
-    public init(title: String, action: @escaping () -> ()) {
+    public init(title: String, action: @escaping () -> Void) {
         self.title = title
         self.action = action
     }
@@ -35,5 +35,3 @@ public struct CapsuleButton: View {
 #Preview {
     CapsuleButton(title: "Continue") {}
 }
-
-

@@ -46,7 +46,6 @@ struct MainTabView: View {
     }
 }
 
-
 struct OverviewMainView: View {
     var body: some View {
         Text("Overview")

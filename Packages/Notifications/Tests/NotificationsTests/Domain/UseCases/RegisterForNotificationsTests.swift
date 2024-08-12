@@ -14,7 +14,7 @@ struct RegisterForNotificationsTests {
         let sut = RegisterForNotifications(repository: repository)
 
         let result = await sut.execute(input: ())
-        
+
         #expect(result == .granted)
         #expect(repository.currentStatusCallsCount == 1)
         #expect(repository.registerCallsCount == 1)
@@ -61,7 +61,6 @@ struct RegisterForNotificationsTests {
         #expect(repository.registerCallsCount == 1)
     }
 }
-
 
 private final class RepositoryMock: NotificationsRegistrationStatusFetching, NotificationsRegistrationStatusCreating {
     enum RepositoryError: Error {

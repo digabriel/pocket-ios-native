@@ -22,7 +22,7 @@ public extension Font {
         public var largeRounded: Font { Font.system(size: 36, weight: .semibold, design: .rounded) }
         public var largerRounded: Font { Font.system(size: 48, weight: .semibold, design: .rounded) }
     }
-    
+
     struct Text: Sendable {
         public var larger: Font { Font.system(size: 30) }
         public var regular: Font { Font.system(size: 18) }

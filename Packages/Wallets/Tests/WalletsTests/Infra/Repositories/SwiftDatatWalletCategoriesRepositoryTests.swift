@@ -40,4 +40,3 @@ struct SwiftDatatWalletCategoriesRepositoryTests {
         #expect(fetchedCategories.map { $0.identifier } == [WalletCategory.savings.rawValue])
     }
 }
-
