@@ -12,6 +12,7 @@ extension CreateWalletBalanceView {
     @MainActor @Observable final class ViewModel {
         let title: String
         let inputPlaceholderText: String
+        let descriptionText: String
         var inputValue: Decimal
         var currency: Currency { model.initialBalance.currency }
 
@@ -21,6 +22,7 @@ extension CreateWalletBalanceView {
             self.model = model
             self.title = model.name
             self.inputPlaceholderText = model.category.inputPlaceholderText
+            self.descriptionText = model.category.descriptionText
             self.inputValue = model.initialBalance.amount
         }
     }
@@ -35,6 +37,17 @@ private extension WalletCategory {
             String(localized: "Current balance")
         case .debt:
             String(localized: "How much was the debt from the start?")
+        }
+    }
+
+    var descriptionText: String {
+        switch self {
+        case .spending:
+            String(localized: "You can estimate now and change it whenever you want")
+        case .savings:
+            String(localized: "You can estimate now and change it whenever you want")
+        case .debt:
+            String(localized: "Provide the amount of debt when you acquired it.")
         }
     }
 }

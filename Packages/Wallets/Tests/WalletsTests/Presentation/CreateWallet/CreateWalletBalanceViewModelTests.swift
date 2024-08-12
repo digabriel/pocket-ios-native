@@ -49,4 +49,31 @@ struct CreateWalletBalanceViewModelTests {
 
         #expect(sut.inputPlaceholderText == expectedText)
     }
+
+    @Test func descriptionTextForDebtCategory() {
+        let expectedText = "Provide the amount of debt when you acquired it."
+        let model = CreateWalletModel.mock(category: .debt)
+
+        let sut = makeSut(model: model)
+
+        #expect(sut.descriptionText == expectedText)
+    }
+
+    @Test func descriptionTextForSavingsCategory() {
+        let expectedText = "You can estimate now and change it whenever you want"
+        let model = CreateWalletModel.mock(category: .savings)
+
+        let sut = makeSut(model: model)
+
+        #expect(sut.descriptionText == expectedText)
+    }
+
+    @Test func descriptionTextForSpendingCategory() {
+        let expectedText = "You can estimate now and change it whenever you want"
+        let model = CreateWalletModel.mock(category: .spending)
+
+        let sut = makeSut(model: model)
+
+        #expect(sut.descriptionText == expectedText)
+    }
 }

@@ -24,24 +24,31 @@ struct CreateWalletBalanceView: View {
 
             Spacer()
 
-            VStack(spacing: Dimensions.shared.fourteen) {
-                Text(viewModel.inputPlaceholderText)
-                    .font(Font.title.regularRounded2)
-                    .foregroundStyle(Color.regular.black)
+            VStack(spacing: Dimensions.shared.nineteen) {
+                VStack(spacing: Dimensions.shared.one) {
+                    Text(viewModel.inputPlaceholderText)
+                        .font(Font.title.regularRounded2)
+                        .foregroundStyle(Color.regular.black)
 
-                CurrencyTextField(
-                    value: $viewModel.inputValue,
-                    font: Font.title.largeRoundedUIKit,
-                    color: UIColor(Color.regular.black)
-                )
-                    .background(Color.background.lightGray)
-                    .clipShape(.rect(cornerRadius: 12))
-                    .frame(height: 80)
-
-                CapsuleButton(title: "Continue") {
-
+                    Text(viewModel.descriptionText)
+                        .font(Font.text.small)
+                        .foregroundStyle(Color.regular.softGray)
                 }
 
+                VStack(spacing: Dimensions.shared.fourteen) {
+                    CurrencyTextField(
+                        value: $viewModel.inputValue,
+                        font: Font.title.largeRoundedUIKit,
+                        color: UIColor(Color.regular.black)
+                    )
+                        .background(Color.background.lightGray)
+                        .clipShape(.rect(cornerRadius: 12))
+                        .frame(height: 80)
+
+                    CapsuleButton(title: "Continue") {
+
+                    }
+                }
             }
             .multilineTextAlignment(.center)
             .padding(.horizontal, Dimensions.shared.sixteen)
