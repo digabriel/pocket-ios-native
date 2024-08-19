@@ -9,8 +9,10 @@ import Foundation
 
 extension CreateWalletOverviewView {
     @MainActor @Observable final class ViewModel {
-        init(model: CreateWalletModel) {
+        let nameViewModel: CreateWalletNameView.ViewModel
 
+        init(model: CreateWalletModel) {
+            nameViewModel = .init(model: model)
         }
     }
 }

@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import Styleguide
 
 struct CreateWalletOverviewView: View {
     @State private var viewModel: ViewModel
@@ -15,8 +16,9 @@ struct CreateWalletOverviewView: View {
     }
 
     var body: some View {
-        VStack {
+        VStack(spacing: Dimensions.shared.ten) {
             headerView
+            nameView
             Spacer()
         }
         .background(Color.background.lightGray)
@@ -29,6 +31,17 @@ struct CreateWalletOverviewView: View {
                 Rectangle()
                     .fill(Color.regular.white)
                     .frame(height: 55)
+                    .shadow(color: Color.regular.black.opacity(0.1), radius: 8)
+                    .mask(Rectangle().padding(.bottom, -20))
+            )
+    }
+
+    private var nameView: some View {
+        CreateWalletNameView(viewModel: viewModel.nameViewModel)
+            .padding(Dimensions.shared.eight)
+            .background(
+                Rectangle()
+                    .fill(Color.regular.white)
                     .shadow(color: Color.regular.black.opacity(0.1), radius: 8)
                     .mask(Rectangle().padding(.bottom, -20))
             )

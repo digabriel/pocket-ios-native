@@ -25,6 +25,7 @@ public extension Font {
 
     struct Text: Sendable {
         public var larger: Font { Font.system(size: 30) }
+        public var large: Font { Font.system(size: 24) }
         public var regular: Font { Font.system(size: 18) }
         public var small: Font { Font.system(size: 15) }
         public var smaller: Font { Font.system(size: 14) }

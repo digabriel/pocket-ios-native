@@ -60,6 +60,12 @@ private extension WalletCategory {
 private extension CreateWalletModel {
     func updatingInitialBalance(newAmount: Decimal) -> CreateWalletModel {
         let money = Money(amount: newAmount, currency: self.initialBalance.currency)
-        return .init(name: self.name, category: self.category, initialBalance: money)
+        return .init(
+            name: self.name,
+            category: self.category,
+            initialBalance: money,
+            iconName: iconName,
+            iconBackgroundColor: iconBackgroundColor
+        )
     }
 }

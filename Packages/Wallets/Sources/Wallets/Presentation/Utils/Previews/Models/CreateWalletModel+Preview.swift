@@ -6,13 +6,22 @@
 //
 
 import CommonDomain
+import SwiftUI
 
 extension CreateWalletModel {
     static func preview(
         name: String = "Test",
         category: WalletCategory = .spending,
-        initialBalance: Money = .zero(currency: .BRL)
+        initialBalance: Money = .zero(currency: .BRL),
+        iconName: String = "car",
+        iconBackgroundColor: Color = .red
     ) -> Self {
-        .init(name: name, category: category, initialBalance: initialBalance)
+        .init(
+            name: name,
+            category: category,
+            initialBalance: initialBalance,
+            iconName: iconName,
+            iconBackgroundColor: iconBackgroundColor
+        )
     }
 }
