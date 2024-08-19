@@ -41,7 +41,7 @@ struct CreateWalletNavigationStack: View {
                 case .balance(let model):
                     CreateWalletBalanceView(viewModel: .init(model: model), navigationPath: $navigationPath)
                 case .overview(let model):
-                    CreateWalletOverviewView()
+                    CreateWalletOverviewView(viewModel: .init(model: model))
                 }
             }
         }
