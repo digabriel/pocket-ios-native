@@ -100,13 +100,7 @@ struct CreateWalletNavigationStack: View {
 
     private func itemView(item: CreateWalletNavigationStack.SectionItem) -> some View {
         HStack(spacing: Dimensions.shared.six) {
-            RoundedRectangle(cornerRadius: 18)
-                .fill(item.iconBackgroundColor)
-                .frame(width: 52, height: 52)
-                .overlay {
-                    Image("icons/\(item.iconName)", bundle: .module)
-                }
-                .shadow(color: item.iconBackgroundColor.opacity(0.5), radius: 2, y: 2)
+            WalletIconView(iconName: item.iconName, backgroundColor: item.iconBackgroundColor)
 
             VStack(alignment: .leading, spacing: Dimensions.shared.two) {
                 Text(item.title)
