@@ -14,7 +14,7 @@ extension CreateWalletModel {
         category: WalletCategory = .spending,
         initialBalance: Money = .zero(currency: .BRL),
         iconName: String = "car",
-        iconBackgroundColor: Color = .red
+        iconBackgroundColor: Color = .regular.purple
     ) -> Self {
         .init(
             name: name,

@@ -38,13 +38,6 @@ struct CreateWalletOverviewView: View {
 
     private var nameView: some View {
         CreateWalletNameView(viewModel: viewModel.nameViewModel)
-            .padding(Dimensions.shared.eight)
-            .background(
-                Rectangle()
-                    .fill(Color.regular.white)
-                    .shadow(color: Color.regular.black.opacity(0.1), radius: 8)
-                    .mask(Rectangle().padding(.bottom, -20))
-            )
     }
 }
 

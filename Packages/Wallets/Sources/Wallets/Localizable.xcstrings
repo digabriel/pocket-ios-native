@@ -1,6 +1,9 @@
 {
   "sourceLanguage" : "en",
   "strings" : {
+    "" : {
+
+    },
     "Car Loan" : {
 
     },
@@ -41,6 +44,9 @@
 
     },
     "Money that you owe someone else." : {
+
+    },
+    "Name" : {
 
     },
     "New Wallet" : {
