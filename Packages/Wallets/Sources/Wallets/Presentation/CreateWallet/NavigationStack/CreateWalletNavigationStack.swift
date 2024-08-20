@@ -41,7 +41,9 @@ struct CreateWalletNavigationStack: View {
                 case .balance(let model):
                     CreateWalletBalanceView(viewModel: .init(model: model), navigationPath: $navigationPath)
                 case .overview(let model):
-                    CreateWalletOverviewView(viewModel: .init(model: model))
+                    CreateWalletOverviewView(viewModel: .init(model: model), navigationPath: $navigationPath)
+                case .setMoney(let title, let inputValue):
+                    CreateWalletOverviewUpdateMoneyView(title: title, inputValue: inputValue)
                 }
             }
         }
@@ -124,10 +126,23 @@ extension CreateWalletNavigationStack {
     enum Screen: Hashable {
         case balance(model: CreateWalletModel)
         case overview(model: CreateWalletModel)
+        case setMoney(title: String, inputValue: Binding<Decimal>)
     }
 }
 
 #Preview {
     let dependency = CreateWalletNavigationStack.Dependency(getWalletCategoriesUseCase: GetWalletCategoriesPreview())
     CreateWalletNavigationStack(viewModel: .init(dependency: dependency))
+}
+
+extension Binding: @retroactive Equatable where Value == Decimal {
+    public static func == (lhs: Binding<Decimal>, rhs: Binding<Decimal>) -> Bool {
+        return lhs.wrappedValue == rhs.wrappedValue
+    }
+}
+
+extension Binding: @retroactive Hashable where Value == Decimal {
+    public func hash(into hasher: inout Hasher) {
+        hasher.combine(wrappedValue)
+    }
 }

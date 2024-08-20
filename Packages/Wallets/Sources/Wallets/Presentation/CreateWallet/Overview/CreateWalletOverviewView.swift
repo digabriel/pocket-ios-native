@@ -10,9 +10,11 @@ import Styleguide
 
 struct CreateWalletOverviewView: View {
     @State private var viewModel: ViewModel
+    @Binding private var navigationPath: [CreateWalletNavigationStack.Screen]
 
-    init(viewModel: ViewModel) {
+    init(viewModel: ViewModel, navigationPath: Binding<[CreateWalletNavigationStack.Screen]>) {
         self._viewModel = .init(initialValue: viewModel)
+        self._navigationPath = navigationPath
     }
 
     var body: some View {
@@ -42,7 +44,7 @@ struct CreateWalletOverviewView: View {
     }
 
     private var balanceView: some View {
-        CreateWalletBalanceOverviewView(viewModel: viewModel.balanceViewModel)
+        CreateWalletBalanceOverviewView(viewModel: viewModel.balanceViewModel, navigationPath: $navigationPath)
             .padding(Dimensions.shared.eight)
             .background(
                 Rectangle()
@@ -55,5 +57,5 @@ struct CreateWalletOverviewView: View {
 
 #Preview {
     let model = CreateWalletModel.preview()
-    return CreateWalletOverviewView(viewModel: .init(model: model))
+    return CreateWalletOverviewView(viewModel: .init(model: model), navigationPath: .constant([]))
 }

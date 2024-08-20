@@ -1,57 +1,19 @@
 //
-//  CreateWalletBalanceView.swift
+//  CreateWalletBalanceOverview+ViewModel.swift
 //  Wallets
 //
 //  Created by Dimas Gabriel on 8/20/24.
 //
 
-import SwiftUI
+import Foundation
 import CommonDomain
-import Styleguide
-
-struct CreateWalletBalanceOverviewView: View {
-    @State private var viewModel: ViewModel
-
-    init(viewModel: ViewModel) {
-        self.viewModel = viewModel
-    }
-
-    var body: some View {
-        VStack(alignment: .leading, spacing: Dimensions.shared.ten) {
-            Text(viewModel.title)
-                .textCase(.uppercase)
-                .font(Font.text.tiny)
-                .foregroundStyle(Color.regular.black)
-                .kerning(1.2)
-
-            VStack(alignment: .leading, spacing: Dimensions.shared.fourteen) {
-                ForEach(viewModel.fields) { field in
-                    HStack {
-                        Text(field.title)
-                            .font(Font.text.small)
-                            .kerning(0.8)
-                        Spacer()
-
-                        if field.showsDisclosureIndicator {
-                            Image(systemName: "chevron.right")
-                        } else {
-                            Text(field.formattedValue)
-                                .font(Font.text.regular)
-                        }
-                    }
-                    .foregroundStyle(Color.regular.black)
-                }
-            }
-        }
-    }
-}
 
 extension CreateWalletBalanceOverviewView {
     @MainActor @Observable final class ViewModel {
-        private let balanceType: BalanceType
+        private(set) var balanceType: BalanceType
 
         let title: String
-        let fields: [ValueField]
+        var fields: [ValueField]
 
         init(balanceType: BalanceType) {
             self.balanceType = balanceType
@@ -65,8 +27,16 @@ extension CreateWalletBalanceOverviewView {
     struct ValueField: Identifiable {
         var id: String { title }
         let title: String
-        let formattedValue: String
-        let showsDisclosureIndicator: Bool
+        let currency: Currency
+        var formattedValue: String
+        var showsDisclosureIndicator: Bool
+        let initialValue: Decimal
+        var currentValue: Decimal {
+            didSet {
+                formattedValue = Money(amount: currentValue, currency: currency).formatted()
+                showsDisclosureIndicator = showsDisclosureIndicator && initialValue == currentValue
+            }
+        }
     }
 
     enum BalanceType {
@@ -91,36 +61,41 @@ extension CreateWalletBalanceOverviewView {
                 return [
                     .init(
                         title: String(localized: "Current balance"),
+                        currency: currentBalance.currency,
                         formattedValue: currentBalance.formatted(),
-                        showsDisclosureIndicator: false
+                        showsDisclosureIndicator: false,
+                        initialValue: currentBalance.amount,
+                        currentValue: currentBalance.amount
                     ),
                     .init(
-                        title: goalBalance == nil ?
-                            String(localized: "Set goal amount") : String(localized: "Goal amount"),
+                        title: String(localized: "Goal amount"),
+                        currency: goalBalance?.currency ?? currentBalance.currency,
                         formattedValue: goalBalance?.formatted() ?? "",
-                        showsDisclosureIndicator: goalBalance == nil
+                        showsDisclosureIndicator: goalBalance == nil || goalBalance?.amount == 0,
+                        initialValue: goalBalance?.amount ?? 0,
+                        currentValue: goalBalance?.amount ?? 0
                     )
                 ]
             case .debt(let startingDebt, let leftToPay):
                 return [
                     .init(
                         title: String(localized: "Left to pay"),
+                        currency: leftToPay.currency,
                         formattedValue: leftToPay.formatted(),
-                        showsDisclosureIndicator: false
+                        showsDisclosureIndicator: false,
+                        initialValue: leftToPay.amount,
+                        currentValue: leftToPay.amount
                     ),
                     .init(
                         title: String(localized: "Starting debt"),
+                        currency: startingDebt.currency,
                         formattedValue: startingDebt.formatted(),
-                        showsDisclosureIndicator: false
+                        showsDisclosureIndicator: false,
+                        initialValue: startingDebt.amount,
+                        currentValue: startingDebt.amount
                     )
                 ]
             }
         }
     }
-}
-
-#Preview {
-    CreateWalletBalanceOverviewView(
-        viewModel: .init(balanceType: .debt(startingDebt: .zero(currency: .USD), leftToPay: .zero(currency: .USD)))
-    )
 }

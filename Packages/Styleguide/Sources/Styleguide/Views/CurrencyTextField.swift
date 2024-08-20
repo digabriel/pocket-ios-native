@@ -20,6 +20,7 @@ public  class CurrencyUITextField: UITextField {
     init(value: Binding<Decimal>) {
         self._value = value
         super.init(frame: .zero)
+        text = currency(from: value.wrappedValue)
     }
 
     required init?(coder: NSCoder) {

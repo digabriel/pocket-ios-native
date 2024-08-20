@@ -1,0 +1,49 @@
+//
+//  CreateWalletOverviewUpdateMoneyView.swift
+//  Wallets
+//
+//  Created by Dimas Gabriel on 8/20/24.
+//
+
+import SwiftUI
+import Styleguide
+
+struct CreateWalletOverviewUpdateMoneyView: View {
+    @Environment(\.dismiss) var dismiss
+
+    let title: String
+    @Binding var inputValue: Decimal
+
+    var body: some View {
+        VStack {
+            CreateWalletNavigationHeaderView(
+                title: title,
+                leftButtonType: .back
+            )
+
+            Spacer()
+
+            VStack(spacing: Dimensions.shared.fourteen) {
+                CurrencyTextField(
+                    value: $inputValue,
+                    font: Font.title.largeRoundedUIKit,
+                    color: UIColor(Color.regular.black)
+                )
+                    .background(Color.background.lightGray)
+                    .clipShape(.rect(cornerRadius: 12))
+                    .frame(height: 80)
+
+                CapsuleButton(title: "Save") { dismiss() }
+            }
+            .multilineTextAlignment(.center)
+            .padding(.horizontal, Dimensions.shared.sixteen)
+
+            Spacer()
+        }
+        .toolbar(.hidden)
+    }
+}
+
+#Preview {
+    CreateWalletOverviewUpdateMoneyView(title: "Update Balance", inputValue: .constant(0))
+}
