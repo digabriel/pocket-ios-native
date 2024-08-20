@@ -19,6 +19,7 @@ struct CreateWalletOverviewView: View {
         VStack(spacing: Dimensions.shared.ten) {
             headerView
             nameView
+            balanceView
             Spacer()
         }
         .background(Color.background.lightGray)
@@ -38,6 +39,17 @@ struct CreateWalletOverviewView: View {
 
     private var nameView: some View {
         CreateWalletNameView(viewModel: viewModel.nameViewModel)
+    }
+
+    private var balanceView: some View {
+        CreateWalletBalanceOverviewView(viewModel: viewModel.balanceViewModel)
+            .padding(Dimensions.shared.eight)
+            .background(
+                Rectangle()
+                    .fill(Color.regular.white)
+                    .shadow(color: Color.regular.black.opacity(0.1), radius: 8)
+                    .mask(Rectangle().padding(.bottom, -20))
+            )
     }
 }
 

@@ -40,6 +40,7 @@ struct CreateWalletNameView: View {
                 .textCase(.uppercase)
                 .font(Font.text.tiny)
                 .foregroundStyle(Color.regular.black)
+                .kerning(1.2)
 
             TextField("", text: $viewModel.name)
                 .font(Font.text.large)

@@ -34,10 +34,16 @@
     "For you credit card or other accounts with credit limit." : {
 
     },
+    "Goal amount" : {
+
+    },
     "House" : {
 
     },
     "How much was the debt from the start?" : {
+
+    },
+    "Left to pay" : {
 
     },
     "Loan" : {
@@ -79,10 +85,16 @@
     "Savings for your trip or your vacation." : {
 
     },
+    "Set goal amount" : {
+
+    },
     "Specify yourself." : {
 
     },
     "Spending" : {
+
+    },
+    "Starting debt" : {
 
     },
     "The wallet for your daily spendings - i.e. your salary account." : {
