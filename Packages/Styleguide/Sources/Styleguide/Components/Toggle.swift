@@ -7,19 +7,19 @@
 
 import SwiftUI
 
-struct Toggle: View {
+public struct Toggle: View {
     let title: String
     let description: String?
 
     @Binding private var isEnabled: Bool
 
-    init(title: String, description: String? = nil, isEnabled: Binding<Bool>) {
+    public init(title: String, description: String? = nil, isEnabled: Binding<Bool>) {
         self.title = title
         self.description = description
         self._isEnabled = isEnabled
     }
 
-    var body: some View {
+    public var body: some View {
         HStack(spacing: Dimensions.shared.five) {
             VStack(alignment: .leading, spacing: Dimensions.shared.three) {
                 Text(title)

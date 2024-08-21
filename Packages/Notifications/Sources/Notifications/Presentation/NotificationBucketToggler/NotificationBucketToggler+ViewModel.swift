@@ -11,7 +11,7 @@ import Foundation
 internal extension NotificationBucketTogglerList {
     final class ViewModel {
         private let modelContext: ModelContext
-        private(set) var notificationBuckets = [NotificationBucket]()
+        var notificationBuckets = [NotificationBucket]()
 
         init(modelContext: ModelContext, keys: [NotificationBucket.Key]) {
             self.modelContext = modelContext

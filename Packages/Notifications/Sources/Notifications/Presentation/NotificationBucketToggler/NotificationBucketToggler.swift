@@ -20,9 +20,7 @@ public struct NotificationBucketTogglerList: View {
     public var body: some View {
         VStack(spacing: Dimensions.shared.fourteen) {
             ForEach(viewModel.notificationBuckets) { bucket in
-                NotificationBucketToggler(bucket: bucket) { isEnabled in
-                    viewModel.toggle(bucket: bucket, isEnabled: isEnabled)
-                }
+                toggle(for: bucket)
             }
         }
         .padding(.all, Dimensions.shared.fourteen)
@@ -30,40 +28,18 @@ public struct NotificationBucketTogglerList: View {
         .cornerRadius(16)
         .shadow(color: Color.regular.black.opacity(0.25), radius: 10, y: 4)
     }
-}
 
-private struct NotificationBucketToggler: View {
-    let bucket: NotificationBucket
-    let onChange: (Bool) -> Void
+    @ViewBuilder func toggle(for bucket: NotificationBucket) -> some View {
+        let isEnabled = $viewModel
+            .notificationBuckets
+            .first { $0.wrappedValue.key == bucket.key }?.isEnabled ?? .constant(false)
 
-    @State private var isEnabled: Bool
-
-    init(bucket: NotificationBucket, onChange: @escaping (Bool) -> Void) {
-        _isEnabled = State(initialValue: bucket.isEnabled)
-        self.bucket = bucket
-        self.onChange = onChange
-    }
-
-    var body: some View {
-        HStack(spacing: Dimensions.shared.five) {
-            VStack(alignment: .leading, spacing: Dimensions.shared.three) {
-                Text(bucket.title)
-                    .foregroundStyle(Color.regular.black)
-                    .font(Font.title.smallRounded)
-                Text(bucket.message)
-                    .foregroundStyle(Color.regular.gray)
-                    .font(Font.text.small)
-            }
-
-            Spacer()
-
-            Toggle("", isOn: $isEnabled)
-                .labelsHidden()
-                .tint(Color.regular.yellow)
-        }
-        .onChange(of: isEnabled) { _, newValue in
-            onChange(newValue)
-        }
+        Toggle(
+            title: bucket.title,
+            description: bucket.message,
+            isEnabled: isEnabled
+        )
+        .tint(Color.regular.yellow)
     }
 }
 
