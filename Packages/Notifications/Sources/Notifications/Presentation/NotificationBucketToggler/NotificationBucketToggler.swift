@@ -18,15 +18,13 @@ public struct NotificationBucketTogglerList: View {
     }
 
     public var body: some View {
-        VStack(spacing: Dimensions.shared.fourteen) {
-            ForEach(viewModel.notificationBuckets) { bucket in
-                toggle(for: bucket)
+        Box {
+            VStack(spacing: Dimensions.shared.fourteen) {
+                ForEach(viewModel.notificationBuckets) { bucket in
+                    toggle(for: bucket)
+                }
             }
         }
-        .padding(.all, Dimensions.shared.fourteen)
-        .background(Color.regular.white)
-        .cornerRadius(16)
-        .shadow(color: Color.regular.black.opacity(0.25), radius: 10, y: 4)
     }
 
     @ViewBuilder func toggle(for bucket: NotificationBucket) -> some View {
