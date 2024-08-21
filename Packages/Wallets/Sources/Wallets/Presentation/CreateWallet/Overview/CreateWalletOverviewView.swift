@@ -29,14 +29,9 @@ struct CreateWalletOverviewView: View {
     }
 
     private var headerView: some View {
-        CreateWalletNavigationHeaderView(title: String(localized: "NEW WALLET"), leftButtonType: .back)
-            .background(
-                Rectangle()
-                    .fill(Color.regular.white)
-                    .frame(height: 55)
-                    .shadow(color: Color.regular.black.opacity(0.1), radius: 8)
-                    .mask(Rectangle().padding(.bottom, -20))
-            )
+        Box(shape: .rectangular) {
+            CreateWalletNavigationHeaderView(title: String(localized: "NEW WALLET"), leftButtonType: .back)
+        }
     }
 
     private var nameView: some View {
@@ -44,14 +39,10 @@ struct CreateWalletOverviewView: View {
     }
 
     private var balanceView: some View {
-        CreateWalletBalanceOverviewView(viewModel: viewModel.balanceViewModel, navigationPath: $navigationPath)
-            .padding(Dimensions.shared.eight)
-            .background(
-                Rectangle()
-                    .fill(Color.regular.white)
-                    .shadow(color: Color.regular.black.opacity(0.1), radius: 8)
-                    .mask(Rectangle().padding(.bottom, -20))
-            )
+        Box(shape: .rectangular) {
+            CreateWalletBalanceOverviewView(viewModel: viewModel.balanceViewModel, navigationPath: $navigationPath)
+                .padding(Dimensions.shared.eight)
+        }
     }
 }
 
