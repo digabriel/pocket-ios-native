@@ -24,12 +24,13 @@ public struct Toggle: View {
             VStack(alignment: .leading, spacing: Dimensions.shared.three) {
                 Text(title)
                     .foregroundStyle(Color.regular.black)
-                    .font(Font.title.smallRounded)
+                    .font(Font.text.small)
+                    .kerning(0.8)
 
                 if let description {
                     Text(description)
                         .foregroundStyle(Color.regular.gray)
-                        .font(Font.text.small)
+                        .font(Font.text.smaller)
                 }
             }
 

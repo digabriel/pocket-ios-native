@@ -28,6 +28,9 @@
     "Debt wallets reduces your net worth. Expenses added from debt wallet deminishes the remaining balance of the wallet." : {
 
     },
+    "Default wallet" : {
+
+    },
     "For money and transactions you make with cash." : {
 
     },
@@ -43,10 +46,16 @@
     "How much was the debt from the start?" : {
 
     },
+    "Include in net worth" : {
+
+    },
     "Left to pay" : {
 
     },
     "Loan" : {
+
+    },
+    "Make this wallet pre-selected when creating transactions" : {
 
     },
     "Money that you owe someone else." : {

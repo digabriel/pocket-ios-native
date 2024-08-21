@@ -14,14 +14,16 @@ extension CreateWalletModel {
         category: WalletCategory = .spending,
         initialBalance: Money = .zero(currency: .BRL),
         iconName: String = "car",
-        iconBackgroundColor: Color = .regular.purple
+        iconBackgroundColor: Color = .regular.purple,
+        settings: [CreateWalletModel.Setting] = CreateWalletModel.Setting.allSettings
     ) -> Self {
         .init(
             name: name,
             category: category,
             initialBalance: initialBalance,
             iconName: iconName,
-            iconBackgroundColor: iconBackgroundColor
+            iconBackgroundColor: iconBackgroundColor,
+            settings: settings
         )
     }
 }

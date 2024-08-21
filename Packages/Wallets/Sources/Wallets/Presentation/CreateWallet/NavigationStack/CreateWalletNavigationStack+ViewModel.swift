@@ -55,7 +55,8 @@ extension CreateWalletNavigationStack {
                 category: activeSection.walletCategory,
                 initialBalance: Money.zero(currency: .USD), // TODO: load default currency from local config
                 iconName: item.iconName,
-                iconBackgroundColor: item.iconBackgroundColor
+                iconBackgroundColor: item.iconBackgroundColor,
+                settings: CreateWalletModel.Setting.allSettings
             )
         }
     }

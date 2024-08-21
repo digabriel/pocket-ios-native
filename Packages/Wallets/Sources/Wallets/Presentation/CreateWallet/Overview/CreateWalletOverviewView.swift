@@ -22,6 +22,7 @@ struct CreateWalletOverviewView: View {
             headerView
             nameView
             balanceView
+            settingsView
             Spacer()
         }
         .background(Color.background.lightGray)
@@ -41,6 +42,13 @@ struct CreateWalletOverviewView: View {
     private var balanceView: some View {
         Box(shape: .rectangular) {
             CreateWalletBalanceOverviewView(viewModel: viewModel.balanceViewModel, navigationPath: $navigationPath)
+                .padding(Dimensions.shared.eight)
+        }
+    }
+
+    private var settingsView: some View {
+        Box(shape: .rectangular) {
+            CreateWalletSettingsView()
                 .padding(Dimensions.shared.eight)
         }
     }

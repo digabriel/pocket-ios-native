@@ -38,7 +38,7 @@ struct CreateWalletNameView: View {
         VStack(alignment: .leading, spacing: Dimensions.shared.one) {
             Text("Name")
                 .textCase(.uppercase)
-                .font(Font.text.tiny)
+                .font(Font.text.tiniest)
                 .foregroundStyle(Color.regular.black)
                 .kerning(1.2)
 

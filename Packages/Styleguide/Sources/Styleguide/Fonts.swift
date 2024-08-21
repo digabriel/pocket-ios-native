@@ -30,6 +30,7 @@ public extension Font {
         public var small: Font { Font.system(size: 15) }
         public var smaller: Font { Font.system(size: 14) }
         public var tiny: Font { Font.system(size: 12) }
+        public var tiniest: Font { Font.system(size: 10) }
     }
 
     struct Button: Sendable {

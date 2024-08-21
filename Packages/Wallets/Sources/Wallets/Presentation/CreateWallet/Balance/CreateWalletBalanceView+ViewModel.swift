@@ -65,7 +65,8 @@ private extension CreateWalletModel {
             category: self.category,
             initialBalance: money,
             iconName: iconName,
-            iconBackgroundColor: iconBackgroundColor
+            iconBackgroundColor: iconBackgroundColor,
+            settings: self.settings
         )
     }
 }
