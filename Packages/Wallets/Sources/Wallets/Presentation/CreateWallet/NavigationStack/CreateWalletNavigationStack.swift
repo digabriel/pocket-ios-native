@@ -38,15 +38,16 @@ struct CreateWalletNavigationStack: View {
             }
             .navigationDestination(for: Screen.self) { screen in
                 switch screen {
-                case .balance(let model):
-                    CreateWalletBalanceView(viewModel: .init(model: model), navigationPath: $navigationPath)
-                case .overview(let model):
-                    CreateWalletOverviewView(viewModel: .init(model: model), navigationPath: $navigationPath)
+                case .initialBalance:
+                    CreateWalletBalanceView(navigationPath: $navigationPath)
+                case .overview:
+                    CreateWalletOverviewView(navigationPath: $navigationPath)
                 case .setMoney(let title, let inputValue):
                     CreateWalletOverviewUpdateMoneyView(title: title, inputValue: inputValue)
                 }
             }
         }
+        .environment(viewModel.createModel)
     }
 
     private var headerView: some View {
@@ -92,8 +93,8 @@ struct CreateWalletNavigationStack: View {
             VStack {
                 itemView(item: item)
                     .onTapGesture {
-                        guard let model = viewModel.selectItem(item: item) else { return }
-                        navigationPath.append(.balance(model: model))
+                        viewModel.selectItem(item: item)
+                        navigationPath.append(.initialBalance)
                     }
                 Divider()
             }
@@ -124,8 +125,8 @@ struct CreateWalletNavigationStack: View {
 
 extension CreateWalletNavigationStack {
     enum Screen: Hashable {
-        case balance(model: CreateWalletModel)
-        case overview(model: CreateWalletModel)
+        case initialBalance
+        case overview
         case setMoney(title: String, inputValue: Binding<Decimal>)
     }
 }

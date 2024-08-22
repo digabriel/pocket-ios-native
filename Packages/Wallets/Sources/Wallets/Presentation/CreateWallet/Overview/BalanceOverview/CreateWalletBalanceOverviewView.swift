@@ -10,24 +10,23 @@ import CommonDomain
 import Styleguide
 
 struct CreateWalletBalanceOverviewView: View {
-    @State private var viewModel: ViewModel
     @Binding private var navigationPath: [CreateWalletNavigationStack.Screen]
+    @Environment(CreateWalletModel.self) private var createModel
 
-    init(viewModel: ViewModel, navigationPath: Binding<[CreateWalletNavigationStack.Screen]>) {
-        self._viewModel = .init(initialValue: viewModel)
+    init(navigationPath: Binding<[CreateWalletNavigationStack.Screen]>) {
         self._navigationPath = navigationPath
     }
 
     var body: some View {
         VStack(alignment: .leading, spacing: Dimensions.shared.ten) {
-            Text(viewModel.title)
+            Text(createModel.walletCategory.name)
                 .textCase(.uppercase)
                 .font(Font.text.tiniest)
                 .foregroundStyle(Color.regular.black)
                 .kerning(1.2)
 
             VStack(alignment: .leading, spacing: Dimensions.shared.fourteen) {
-                ForEach(viewModel.fields) { field in
+                ForEach(allBalanceFields, id: \.title) { field in
                     fieldView(field: field)
                         .onTapGesture { navigateToUpdate(field: field) }
                 }
@@ -35,7 +34,7 @@ struct CreateWalletBalanceOverviewView: View {
         }
     }
 
-    private func fieldView(field: ValueField) -> some View {
+    private func fieldView(field: BalanceField) -> some View {
         HStack {
             Text(field.title)
                 .font(Font.text.small)
@@ -53,17 +52,79 @@ struct CreateWalletBalanceOverviewView: View {
         .foregroundStyle(Color.regular.black)
     }
 
-    private func navigateToUpdate(field: ValueField) {
-        let fieldBinding = $viewModel.fields.first { $0.id == field.id }?.currentValue ?? .constant(0)
-        navigationPath.append(.setMoney(title: field.title, inputValue: fieldBinding))
+    private func navigateToUpdate(field: BalanceField) {
+        navigationPath.append(.setMoney(title: field.title, inputValue: field.balanceAmount))
+    }
+}
+
+extension CreateWalletBalanceOverviewView {
+    struct BalanceField {
+        let title: String
+        let currency: Currency
+        let showsDisclosureIndicator: Bool
+        var balanceAmount: Binding<Decimal>
+
+        var formattedValue: String {
+            Money(amount: balanceAmount.wrappedValue, currency: currency).formatted()
+        }
+    }
+
+    var allBalanceFields: [BalanceField] {
+        @Bindable var bindableModel = createModel
+
+        switch createModel.walletCategory {
+        case .debt:
+            return [
+                .init(
+                    title: String(localized: "Left to pay"),
+                    currency: createModel.currency,
+                    showsDisclosureIndicator: false,
+                    balanceAmount: $bindableModel.leftToPayBalanceAmount
+                ),
+                .init(
+                    title: String(localized: "Starting debt"),
+                    currency: createModel.currency,
+                    showsDisclosureIndicator: false,
+                    balanceAmount: $bindableModel.initialBalanceAmount
+                )
+            ]
+        case .spending:
+            let hasGoalAmount = createModel.hasGoalBalanceAmount
+            return [
+                .init(
+                    title: String(localized: "Current balance"),
+                    currency: createModel.currency,
+                    showsDisclosureIndicator: false,
+                    balanceAmount: $bindableModel.initialBalanceAmount
+                ),
+                .init(
+                    title: hasGoalAmount ? String(localized: "Goal amount") : String(localized: "Set Goal amount"),
+                    currency: createModel.currency,
+                    showsDisclosureIndicator: !hasGoalAmount,
+                    balanceAmount: $bindableModel.goalBalanceAmount
+                )
+            ]
+        case .savings:
+            let hasGoalAmount = createModel.hasGoalBalanceAmount
+            return [
+                .init(
+                    title: String(localized: "Current balance"),
+                    currency: createModel.currency,
+                    showsDisclosureIndicator: false,
+                    balanceAmount: $bindableModel.initialBalanceAmount
+                ),
+                .init(
+                    title: hasGoalAmount ? String(localized: "Goal amount") : String(localized: "Set Goal amount"),
+                    currency: createModel.currency,
+                    showsDisclosureIndicator: !hasGoalAmount,
+                    balanceAmount: $bindableModel.goalBalanceAmount
+                )
+            ]
+        }
     }
 }
 
 #Preview {
-    CreateWalletBalanceOverviewView(
-        viewModel: .init(
-            balanceType: .debt(startingDebt: .zero(currency: .USD), leftToPay: .zero(currency: .USD))
-        ),
-        navigationPath: .constant([])
-    )
+    CreateWalletBalanceOverviewView(navigationPath: .constant([.overview]))
+        .environment(CreateWalletModel.preview())
 }

@@ -9,11 +9,10 @@ import SwiftUI
 import Styleguide
 
 struct CreateWalletOverviewView: View {
-    @State private var viewModel: ViewModel
     @Binding private var navigationPath: [CreateWalletNavigationStack.Screen]
+    @Environment(CreateWalletModel.self) var createModel
 
-    init(viewModel: ViewModel, navigationPath: Binding<[CreateWalletNavigationStack.Screen]>) {
-        self._viewModel = .init(initialValue: viewModel)
+    init(navigationPath: Binding<[CreateWalletNavigationStack.Screen]>) {
         self._navigationPath = navigationPath
     }
 
@@ -36,12 +35,12 @@ struct CreateWalletOverviewView: View {
     }
 
     private var nameView: some View {
-        CreateWalletNameView(viewModel: viewModel.nameViewModel)
+        CreateWalletNameView()
     }
 
     private var balanceView: some View {
         Box(shape: .rectangular) {
-            CreateWalletBalanceOverviewView(viewModel: viewModel.balanceViewModel, navigationPath: $navigationPath)
+            CreateWalletBalanceOverviewView(navigationPath: $navigationPath)
                 .padding(Dimensions.shared.eight)
         }
     }
@@ -55,6 +54,6 @@ struct CreateWalletOverviewView: View {
 }
 
 #Preview {
-    let model = CreateWalletModel.preview()
-    return CreateWalletOverviewView(viewModel: .init(model: model), navigationPath: .constant([]))
+    return CreateWalletOverviewView(navigationPath: .constant([]))
+        .environment(CreateWalletModel.preview())
 }

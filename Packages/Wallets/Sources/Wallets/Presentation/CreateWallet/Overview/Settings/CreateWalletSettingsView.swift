@@ -9,9 +9,11 @@ import SwiftUI
 import Styleguide
 
 struct CreateWalletSettingsView: View {
-    @State private(set) var settings: [CreateWalletModel.Setting] = CreateWalletModel.Setting.allSettings
+    @Environment(CreateWalletModel.self) private var createModel
 
     var body: some View {
+        @Bindable var createModel = createModel
+
         VStack(alignment: .leading, spacing: Dimensions.shared.ten) {
             Text("Settings")
                 .textCase(.uppercase)
@@ -20,7 +22,7 @@ struct CreateWalletSettingsView: View {
                 .kerning(1.2)
 
             VStack(spacing: Dimensions.shared.fourteen) {
-                ForEach($settings, id: \.identifier) { setting in
+                ForEach($createModel.settings, id: \.identifier) { setting in
                     Toggle(
                         title: setting.wrappedValue.title,
                         description: setting.wrappedValue.description,
@@ -35,4 +37,5 @@ struct CreateWalletSettingsView: View {
 
 #Preview {
     CreateWalletSettingsView()
+        .environment(CreateWalletModel.preview())
 }

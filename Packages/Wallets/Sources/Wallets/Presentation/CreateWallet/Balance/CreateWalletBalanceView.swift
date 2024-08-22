@@ -9,18 +9,17 @@ import SwiftUI
 import Styleguide
 
 struct CreateWalletBalanceView: View {
-    @State private var viewModel: ViewModel
     @Binding private var navigationPath: [CreateWalletNavigationStack.Screen]
+    @Environment(CreateWalletModel.self) var createModel
 
-    init(viewModel: ViewModel, navigationPath: Binding<[CreateWalletNavigationStack.Screen]>) {
-        _viewModel = .init(initialValue: viewModel)
+    init(navigationPath: Binding<[CreateWalletNavigationStack.Screen]>) {
         _navigationPath = navigationPath
     }
 
     var body: some View {
         VStack {
             CreateWalletNavigationHeaderView(
-                title: viewModel.title,
+                title: createModel.name,
                 leftButtonType: .back
             )
 
@@ -28,18 +27,18 @@ struct CreateWalletBalanceView: View {
 
             VStack(spacing: Dimensions.shared.nineteen) {
                 VStack(spacing: Dimensions.shared.one) {
-                    Text(viewModel.inputPlaceholderText)
+                    Text(createModel.walletCategory.inputPlaceholderText)
                         .font(Font.title.regularRounded2)
                         .foregroundStyle(Color.regular.black)
 
-                    Text(viewModel.descriptionText)
+                    Text(createModel.walletCategory.descriptionText)
                         .font(Font.text.small)
                         .foregroundStyle(Color.regular.softGray)
                 }
 
                 VStack(spacing: Dimensions.shared.fourteen) {
                     CurrencyTextField(
-                        value: $viewModel.inputValue,
+                        value: inputProperty,
                         font: Font.title.largeRoundedUIKit,
                         color: UIColor(Color.regular.black)
                     )
@@ -48,7 +47,7 @@ struct CreateWalletBalanceView: View {
                         .frame(height: 80)
 
                     CapsuleButton(title: "Continue") {
-                        navigationPath.append(.overview(model: viewModel.updatedModel))
+                        navigationPath.append(.overview)
                     }
                 }
             }
@@ -59,9 +58,44 @@ struct CreateWalletBalanceView: View {
         }
         .toolbar(.hidden)
     }
+
+    var inputProperty: Binding<Decimal> {
+        @Bindable var createModel = createModel
+
+        switch navigationPath.last {
+        case .initialBalance:
+            return $createModel.initialBalanceAmount
+        default:
+            return .constant(0)
+        }
+    }
+}
+
+private extension WalletCategory {
+    var inputPlaceholderText: String {
+        switch self {
+        case .spending:
+            String(localized: "Current balance")
+        case .savings:
+            String(localized: "Current balance")
+        case .debt:
+            String(localized: "How much was the debt from the start?")
+        }
+    }
+
+    var descriptionText: String {
+        switch self {
+        case .spending:
+            String(localized: "You can estimate now and change it whenever you want")
+        case .savings:
+            String(localized: "You can estimate now and change it whenever you want")
+        case .debt:
+            String(localized: "Provide the amount of debt when you acquired it.")
+        }
+    }
 }
 
 #Preview {
-    let viewModel = CreateWalletBalanceView.ViewModel(model: .preview())
-    CreateWalletBalanceView(viewModel: viewModel, navigationPath: .constant([]))
+    CreateWalletBalanceView(navigationPath: .constant([.initialBalance]))
+        .environment(CreateWalletModel.preview())
 }

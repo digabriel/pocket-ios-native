@@ -20,6 +20,8 @@ extension CreateWalletNavigationStack {
         }
         private(set) var activeSection: Section?
 
+        private(set) var createModel = CreateWalletModel()
+
         init(dependency: Dependency) {
             self.dependency = dependency
         }
@@ -47,17 +49,14 @@ extension CreateWalletNavigationStack {
             }
         }
 
-        func selectItem(item: SectionItem) -> CreateWalletModel? {
-            guard let activeSection else { return nil }
+        func selectItem(item: SectionItem) {
+            guard let activeSection else { return }
 
-            return CreateWalletModel(
-                name: item.title,
-                category: activeSection.walletCategory,
-                initialBalance: Money.zero(currency: .USD), // TODO: load default currency from local config
-                iconName: item.iconName,
-                iconBackgroundColor: item.iconBackgroundColor,
-                settings: CreateWalletModel.Setting.allSettings
-            )
+            createModel.reset()
+            createModel.name = item.title
+            createModel.iconName = item.iconName
+            createModel.iconBackgroundColor = item.iconBackgroundColor
+            createModel.walletCategory = activeSection.walletCategory
         }
     }
 }

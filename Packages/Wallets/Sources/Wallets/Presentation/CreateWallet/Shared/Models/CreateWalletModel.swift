@@ -2,20 +2,42 @@
 //  CreateWalletModel.swift
 //  Wallets
 //
-//  Created by Dimas Gabriel on 8/9/24.
+//  Created by Dimas Gabriel on 8/21/24.
 //
 
 import Foundation
-import CommonDomain
+import Styleguide
 import SwiftUI
+import CommonDomain
 
-struct CreateWalletModel: Equatable, Hashable {
-    let name: String
-    let category: WalletCategory
-    let initialBalance: Money
-    let iconName: String
-    let iconBackgroundColor: Color
-    let settings: [Setting]
+@Observable final class CreateWalletModel {
+    var walletCategory: WalletCategory = .spending
+    var currency: Currency = .USD
+    var name: String = ""
+    var iconName: String = ""
+    var iconBackgroundColor: Color = Color.black.opacity(0)
+    var initialBalanceAmount: Decimal = .zero
+    var goalBalanceAmount: Decimal = .zero {
+        didSet {
+            hasGoalBalanceAmount = goalBalanceAmount > .zero
+        }
+    }
+    var hasGoalBalanceAmount: Bool = false
+    var leftToPayBalanceAmount: Decimal = .zero
+    var settings: [Setting] = CreateWalletModel.Setting.allSettings
+
+    func reset() {
+        walletCategory = .spending
+        currency = .USD
+        name = ""
+        iconName = ""
+        iconBackgroundColor = Color.black.opacity(0)
+        initialBalanceAmount = .zero
+        goalBalanceAmount = .zero
+        hasGoalBalanceAmount = false
+        leftToPayBalanceAmount = .zero
+        settings = CreateWalletModel.Setting.allSettings
+    }
 }
 
 extension CreateWalletModel {
@@ -29,7 +51,7 @@ extension CreateWalletModel {
         let description: String?
         var isEnabled: Bool
 
-        static var allSettings: [Self] {
+        fileprivate static var allSettings: [Self] {
             return [
                 .init(
                     identifier: .netWorth,

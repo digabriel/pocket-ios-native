@@ -9,20 +9,18 @@ import SwiftUI
 import Styleguide
 
 struct CreateWalletNameView: View {
-    @State private var viewModel: ViewModel
-
-    init(viewModel: ViewModel) {
-        self.viewModel = viewModel
-    }
+    @Environment(CreateWalletModel.self) private var createModel
 
     var body: some View {
+        @Bindable var createModel = createModel
+
         VStack(spacing: Dimensions.shared.eight) {
             HStack(spacing: Dimensions.shared.six) {
-                WalletIconView(iconName: viewModel.iconName, backgroundColor: viewModel.iconBackgroundColor)
+                WalletIconView(iconName: createModel.iconName, backgroundColor: createModel.iconBackgroundColor)
                 textField
             }
 
-            WalletIconBackgroundPicker(selected: $viewModel.iconBackgroundColor)
+            WalletIconBackgroundPicker(selected: $createModel.iconBackgroundColor)
                 .padding(.horizontal, -Dimensions.shared.eight)
         }
         .padding(Dimensions.shared.eight)
@@ -34,7 +32,9 @@ struct CreateWalletNameView: View {
         )
     }
 
-    private var textField: some View {
+    @ViewBuilder private var textField: some View {
+        @Bindable var createModel = createModel
+
         VStack(alignment: .leading, spacing: Dimensions.shared.one) {
             Text("Name")
                 .textCase(.uppercase)
@@ -42,7 +42,7 @@ struct CreateWalletNameView: View {
                 .foregroundStyle(Color.regular.black)
                 .kerning(1.2)
 
-            TextField("", text: $viewModel.name)
+            TextField("", text: $createModel.name)
                 .font(Font.text.large)
         }
         .padding(.top, Dimensions.shared.one)
@@ -50,19 +50,6 @@ struct CreateWalletNameView: View {
 }
 
 #Preview {
-    CreateWalletNameView(viewModel: .init(model: .preview()))
-}
-
-extension CreateWalletNameView {
-    @MainActor @Observable final class ViewModel {
-        var name: String
-        let iconName: String
-        var iconBackgroundColor: Color
-
-        init(model: CreateWalletModel) {
-            self.name = model.name
-            self.iconName = model.iconName
-            self.iconBackgroundColor = model.iconBackgroundColor
-        }
-    }
+    CreateWalletNameView()
+        .environment(CreateWalletModel.preview())
 }
