@@ -17,12 +17,21 @@ struct CreateWalletOverviewView: View {
     }
 
     var body: some View {
-        VStack(spacing: Dimensions.shared.ten) {
-            headerView
-            nameView
-            balanceView
-            settingsView
-            Spacer()
+        ZStack(alignment: .bottom) {
+            ScrollView {
+                VStack(spacing: Dimensions.shared.ten) {
+                    headerView
+                    nameView
+                    balanceView
+                    settingsView
+                    Spacer(minLength: CapsuleButton.defaultHeight)
+                }
+            }
+
+            CapsuleButton(title: String(localized: "Save").uppercased()) {
+                print("Save Wallet")
+            }
+            .padding(.horizontal, Dimensions.shared.ten)
         }
         .background(Color.background.lightGray)
         .navigationBarBackButtonHidden()

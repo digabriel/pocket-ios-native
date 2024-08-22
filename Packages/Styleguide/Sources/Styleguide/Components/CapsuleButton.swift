@@ -22,7 +22,7 @@ public struct CapsuleButton: View {
         } label: {
             Capsule()
                 .fill(Color.regular.black)
-                .frame(maxHeight: 66)
+                .frame(maxHeight: CapsuleButton.defaultHeight)
                 .overlay {
                     Text(title)
                         .foregroundColor(Color.regular.white)
@@ -30,6 +30,10 @@ public struct CapsuleButton: View {
                 }
         }
     }
+}
+
+public extension CapsuleButton {
+    static var defaultHeight: CGFloat = 66
 }
 
 #Preview {
