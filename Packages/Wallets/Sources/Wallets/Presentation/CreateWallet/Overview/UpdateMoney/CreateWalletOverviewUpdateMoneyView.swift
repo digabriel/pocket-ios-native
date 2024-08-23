@@ -10,6 +10,7 @@ import Styleguide
 
 struct CreateWalletOverviewUpdateMoneyView: View {
     @Environment(\.dismiss) var dismiss
+    @FocusState private var isTextFieldFocused: Bool
 
     let title: String
     @Binding var inputValue: Decimal
@@ -32,6 +33,7 @@ struct CreateWalletOverviewUpdateMoneyView: View {
                     .background(Color.background.lightGray)
                     .clipShape(.rect(cornerRadius: 12))
                     .frame(height: 80)
+                    .focused($isTextFieldFocused)
 
                 CapsuleButton(title: "Save") { dismiss() }
             }
@@ -41,6 +43,9 @@ struct CreateWalletOverviewUpdateMoneyView: View {
             Spacer()
         }
         .toolbar(.hidden)
+        .onAppear {
+            isTextFieldFocused = true
+        }
     }
 }
 

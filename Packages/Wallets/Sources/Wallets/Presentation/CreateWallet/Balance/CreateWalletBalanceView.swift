@@ -12,6 +12,7 @@ struct CreateWalletBalanceView: View {
     let screen: CreateWalletNavigationStack.Screen
     @Binding private var navigationPath: [CreateWalletNavigationStack.Screen]
     @Environment(CreateWalletModel.self) var createModel
+    @FocusState private var isTextFieldFocused: Bool
 
     init(screen: CreateWalletNavigationStack.Screen, navigationPath: Binding<[CreateWalletNavigationStack.Screen]>) {
         _navigationPath = navigationPath
@@ -47,6 +48,7 @@ struct CreateWalletBalanceView: View {
                         .background(Color.background.lightGray)
                         .clipShape(.rect(cornerRadius: 12))
                         .frame(height: 80)
+                        .focused($isTextFieldFocused)
 
                     CapsuleButton(title: "Continue") {
                         navigateNext()
@@ -55,6 +57,9 @@ struct CreateWalletBalanceView: View {
             }
             .multilineTextAlignment(.center)
             .padding(.horizontal, Dimensions.shared.sixteen)
+            .onAppear {
+                isTextFieldFocused = true
+            }
 
             Spacer()
         }
