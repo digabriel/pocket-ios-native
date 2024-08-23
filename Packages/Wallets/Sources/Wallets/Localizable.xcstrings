@@ -43,6 +43,9 @@
     "House" : {
 
     },
+    "How much is left to pay?" : {
+
+    },
     "How much was the debt from the start?" : {
 
     },
@@ -74,6 +77,9 @@
 
     },
     "Personal Debt" : {
+
+    },
+    "Provide the amount of debt that you still have to pay" : {
 
     },
     "Provide the amount of debt when you acquired it." : {

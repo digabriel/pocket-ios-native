@@ -9,11 +9,13 @@ import SwiftUI
 import Styleguide
 
 struct CreateWalletBalanceView: View {
+    let screen: CreateWalletNavigationStack.Screen
     @Binding private var navigationPath: [CreateWalletNavigationStack.Screen]
     @Environment(CreateWalletModel.self) var createModel
 
-    init(navigationPath: Binding<[CreateWalletNavigationStack.Screen]>) {
+    init(screen: CreateWalletNavigationStack.Screen, navigationPath: Binding<[CreateWalletNavigationStack.Screen]>) {
         _navigationPath = navigationPath
+        self.screen = screen
     }
 
     var body: some View {
@@ -27,11 +29,11 @@ struct CreateWalletBalanceView: View {
 
             VStack(spacing: Dimensions.shared.nineteen) {
                 VStack(spacing: Dimensions.shared.one) {
-                    Text(createModel.walletCategory.inputPlaceholderText)
+                    Text(inputPlaceholderText)
                         .font(Font.title.regularRounded2)
                         .foregroundStyle(Color.regular.black)
 
-                    Text(createModel.walletCategory.descriptionText)
+                    Text(descriptionText)
                         .font(Font.text.small)
                         .foregroundStyle(Color.regular.softGray)
                 }
@@ -47,7 +49,7 @@ struct CreateWalletBalanceView: View {
                         .frame(height: 80)
 
                     CapsuleButton(title: "Continue") {
-                        navigationPath.append(.overview)
+                        navigateNext()
                     }
                 }
             }
@@ -59,43 +61,69 @@ struct CreateWalletBalanceView: View {
         .toolbar(.hidden)
     }
 
-    var inputProperty: Binding<Decimal> {
+    private var inputProperty: Binding<Decimal> {
         @Bindable var createModel = createModel
 
-        switch navigationPath.last {
+        switch screen {
         case .initialBalance:
             return $createModel.initialBalanceAmount
+        case .debtLeftToPayBalance:
+            return $createModel.leftToPayBalanceAmount
         default:
             return .constant(0)
+        }
+    }
+
+    private func navigateNext() {
+        switch screen {
+        case .initialBalance:
+            navigationPath.append(createModel.walletCategory == .debt ? .debtLeftToPayBalance : .overview)
+        case .debtLeftToPayBalance:
+            navigationPath.append(.overview)
+        default: return
+        }
+    }
+}
+
+private extension CreateWalletBalanceView {
+    var inputPlaceholderText: String {
+        switch createModel.walletCategory {
+        case .spending, .savings:
+            String(localized: "Current balance")
+        case .debt:
+            switch screen {
+            case .initialBalance:
+                String(localized: "How much was the debt from the start?")
+            case .debtLeftToPayBalance:
+                String(localized: "How much is left to pay?")
+            default:
+                ""
+            }
+        }
+    }
+
+    var descriptionText: String {
+        switch createModel.walletCategory {
+        case .spending, .savings:
+            String(localized: "You can estimate now and change it whenever you want")
+        case .debt:
+            switch screen {
+            case .initialBalance:
+                String(localized: "Provide the amount of debt when you acquired it.")
+            case .debtLeftToPayBalance:
+                String(localized: "Provide the amount of debt that you still have to pay")
+            default:
+                ""
+            }
         }
     }
 }
 
 private extension WalletCategory {
-    var inputPlaceholderText: String {
-        switch self {
-        case .spending:
-            String(localized: "Current balance")
-        case .savings:
-            String(localized: "Current balance")
-        case .debt:
-            String(localized: "How much was the debt from the start?")
-        }
-    }
 
-    var descriptionText: String {
-        switch self {
-        case .spending:
-            String(localized: "You can estimate now and change it whenever you want")
-        case .savings:
-            String(localized: "You can estimate now and change it whenever you want")
-        case .debt:
-            String(localized: "Provide the amount of debt when you acquired it.")
-        }
-    }
 }
 
 #Preview {
-    CreateWalletBalanceView(navigationPath: .constant([.initialBalance]))
+    CreateWalletBalanceView(screen: .initialBalance, navigationPath: .constant([.initialBalance]))
         .environment(CreateWalletModel.preview())
 }

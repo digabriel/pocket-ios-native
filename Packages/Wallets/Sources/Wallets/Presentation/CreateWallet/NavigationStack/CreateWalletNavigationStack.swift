@@ -38,8 +38,8 @@ struct CreateWalletNavigationStack: View {
             }
             .navigationDestination(for: Screen.self) { screen in
                 switch screen {
-                case .initialBalance:
-                    CreateWalletBalanceView(navigationPath: $navigationPath)
+                case .initialBalance, .debtLeftToPayBalance:
+                    CreateWalletBalanceView(screen: screen, navigationPath: $navigationPath)
                 case .overview:
                     CreateWalletOverviewView(navigationPath: $navigationPath)
                 case .setMoney(let title, let inputValue):
@@ -126,6 +126,7 @@ struct CreateWalletNavigationStack: View {
 extension CreateWalletNavigationStack {
     enum Screen: Hashable {
         case initialBalance
+        case debtLeftToPayBalance
         case overview
         case setMoney(title: String, inputValue: Binding<Decimal>)
     }
