@@ -13,6 +13,7 @@ struct CreateWalletOverviewUpdateMoneyView: View {
     @FocusState private var isTextFieldFocused: Bool
 
     let title: String
+    let isNegativeInputSupported: Bool
     @Binding var inputValue: Decimal
 
     var body: some View {
@@ -28,7 +29,8 @@ struct CreateWalletOverviewUpdateMoneyView: View {
                 CurrencyTextField(
                     value: $inputValue,
                     font: Font.title.largeRoundedUIKit,
-                    color: UIColor(Color.regular.black)
+                    color: UIColor(Color.regular.black),
+                    isNegativeInputSupported: isNegativeInputSupported
                 )
                     .background(Color.background.lightGray)
                     .clipShape(.rect(cornerRadius: 12))
@@ -50,5 +52,9 @@ struct CreateWalletOverviewUpdateMoneyView: View {
 }
 
 #Preview {
-    CreateWalletOverviewUpdateMoneyView(title: "Update Balance", inputValue: .constant(0))
+    CreateWalletOverviewUpdateMoneyView(
+        title: "Update Balance",
+        isNegativeInputSupported: true,
+        inputValue: .constant(0)
+    )
 }

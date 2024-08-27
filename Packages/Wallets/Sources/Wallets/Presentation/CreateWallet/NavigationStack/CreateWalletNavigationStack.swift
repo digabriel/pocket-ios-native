@@ -42,8 +42,12 @@ struct CreateWalletNavigationStack: View {
                     CreateWalletBalanceView(screen: screen, navigationPath: $navigationPath)
                 case .overview:
                     CreateWalletOverviewView(navigationPath: $navigationPath)
-                case .setMoney(let title, let inputValue):
-                    CreateWalletOverviewUpdateMoneyView(title: title, inputValue: inputValue)
+                case .setMoney(let title, let inputValue, let isNegativeInputSupported):
+                    CreateWalletOverviewUpdateMoneyView(
+                        title: title,
+                        isNegativeInputSupported: isNegativeInputSupported,
+                        inputValue: inputValue
+                    )
                 }
             }
         }
@@ -128,7 +132,7 @@ extension CreateWalletNavigationStack {
         case initialBalance
         case debtLeftToPayBalance
         case overview
-        case setMoney(title: String, inputValue: Binding<Decimal>)
+        case setMoney(title: String, inputValue: Binding<Decimal>, isNegativeInputSupported: Bool)
     }
 }
 

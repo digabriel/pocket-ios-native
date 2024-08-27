@@ -17,10 +17,17 @@ public  class CurrencyUITextField: UITextField {
         return formatter
     }()
 
-    init(value: Binding<Decimal>) {
+    private let segmentedControl = UISegmentedControl(items: ["Negative", "Positive"])
+    private var isNegativeValue = false
+
+    init(value: Binding<Decimal>, isNegativeInputSupported: Bool) {
         self._value = value
         super.init(frame: .zero)
         text = currency(from: value.wrappedValue)
+
+        if isNegativeInputSupported {
+            setupAccessoryView()
+        }
     }
 
     required init?(coder: NSCoder) {
@@ -56,11 +63,22 @@ public  class CurrencyUITextField: UITextField {
     }
 
     private var decimal: Decimal {
-      return textValue.decimal / pow(10, formatter.maximumFractionDigits)
+        return (textValue.decimal / pow(10, formatter.maximumFractionDigits)) * (isNegativeValue ? -1 : 1)
     }
 
     private func currency(from decimal: Decimal) -> String {
         return formatter.string(for: decimal) ?? ""
+    }
+
+    private func setupAccessoryView() {
+        segmentedControl.selectedSegmentIndex = 1
+        segmentedControl.addTarget(self, action: #selector(segmentedControlDidUpdate), for: .valueChanged)
+        inputAccessoryView = segmentedControl
+    }
+
+    @objc private func segmentedControlDidUpdate() {
+        isNegativeValue = segmentedControl.selectedSegmentIndex == 0
+        editingChanged()
     }
 }
 
@@ -79,10 +97,12 @@ private extension LosslessStringConvertible {
 public struct CurrencyTextField: UIViewRepresentable {
     private let currencyField: CurrencyUITextField
 
-    public init(value: Binding<Decimal>, font: UIFont, color: UIColor) {
-        currencyField = CurrencyUITextField(value: value)
+    public init(value: Binding<Decimal>, font: UIFont, color: UIColor, isNegativeInputSupported: Bool = false) {
+        currencyField = CurrencyUITextField(value: value, isNegativeInputSupported: isNegativeInputSupported)
         currencyField.font = font
         currencyField.textColor = color
+
+        let button = UIButton(frame: .zero)
     }
 
     public func makeUIView(context: Context) -> CurrencyUITextField {

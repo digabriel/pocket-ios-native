@@ -43,7 +43,8 @@ struct CreateWalletBalanceView: View {
                     CurrencyTextField(
                         value: inputProperty,
                         font: Font.title.largeRoundedUIKit,
-                        color: UIColor(Color.regular.black)
+                        color: UIColor(Color.regular.black),
+                        isNegativeInputSupported: createModel.walletCategory != .debt
                     )
                         .background(Color.background.lightGray)
                         .clipShape(.rect(cornerRadius: 12))

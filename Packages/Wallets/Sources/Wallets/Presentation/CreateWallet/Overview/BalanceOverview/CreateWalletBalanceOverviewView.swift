@@ -53,7 +53,14 @@ struct CreateWalletBalanceOverviewView: View {
     }
 
     private func navigateToUpdate(field: BalanceField) {
-        navigationPath.append(.setMoney(title: field.title, inputValue: field.balanceAmount))
+        navigationPath
+            .append(
+                .setMoney(
+                    title: field.title,
+                    inputValue: field.balanceAmount,
+                    isNegativeInputSupported: field.isNegativeInputSupported
+                )
+            )
     }
 }
 
@@ -62,6 +69,7 @@ extension CreateWalletBalanceOverviewView {
         let title: String
         let currency: Currency
         let showsDisclosureIndicator: Bool
+        let isNegativeInputSupported: Bool
         var balanceAmount: Binding<Decimal>
 
         var formattedValue: String {
@@ -79,12 +87,14 @@ extension CreateWalletBalanceOverviewView {
                     title: String(localized: "Left to pay"),
                     currency: createModel.currency,
                     showsDisclosureIndicator: false,
+                    isNegativeInputSupported: false,
                     balanceAmount: $bindableModel.leftToPayBalanceAmount
                 ),
                 .init(
                     title: String(localized: "Starting debt"),
                     currency: createModel.currency,
                     showsDisclosureIndicator: false,
+                    isNegativeInputSupported: false,
                     balanceAmount: $bindableModel.initialBalanceAmount
                 )
             ]
@@ -95,12 +105,14 @@ extension CreateWalletBalanceOverviewView {
                     title: String(localized: "Current balance"),
                     currency: createModel.currency,
                     showsDisclosureIndicator: false,
+                    isNegativeInputSupported: true,
                     balanceAmount: $bindableModel.initialBalanceAmount
                 ),
                 .init(
                     title: hasGoalAmount ? String(localized: "Goal amount") : String(localized: "Set Goal amount"),
                     currency: createModel.currency,
                     showsDisclosureIndicator: !hasGoalAmount,
+                    isNegativeInputSupported: false,
                     balanceAmount: $bindableModel.goalBalanceAmount
                 )
             ]
@@ -111,12 +123,14 @@ extension CreateWalletBalanceOverviewView {
                     title: String(localized: "Current balance"),
                     currency: createModel.currency,
                     showsDisclosureIndicator: false,
+                    isNegativeInputSupported: true,
                     balanceAmount: $bindableModel.initialBalanceAmount
                 ),
                 .init(
                     title: hasGoalAmount ? String(localized: "Goal amount") : String(localized: "Set Goal amount"),
                     currency: createModel.currency,
                     showsDisclosureIndicator: !hasGoalAmount,
+                    isNegativeInputSupported: false,
                     balanceAmount: $bindableModel.goalBalanceAmount
                 )
             ]
